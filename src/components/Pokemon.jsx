@@ -53,7 +53,8 @@ const Pokemon = () => {
           !searchResultsVisible && (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               {pokemonData.map((pokemon, index) => (
-                <div key={index} className="bg-white rounded-lg p-4 shadow-md">
+                <div key={index}   className="bg-gray-300 rounded-lg p-4 shadow-xl transition-colors duration-300 hover:bg-gradient-to-b hover:from-red-500 hover:via-red-300 hover:to-zinc-200"
+>
                   {pokemon.officialArtworkUrl ? (
                     <img
                       src={pokemon.officialArtworkUrl}
