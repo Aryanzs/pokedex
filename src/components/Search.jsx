@@ -52,10 +52,7 @@ const Search = ({ setSearchResultsVisible, setPokemonData, currentPage, setLoadi
     <div >
       <div className="flex justify-center mt-3">
       <div className="relative">
-      <img src={SearchIcon} alt="Search Icon" className="absolute right-6 top-2 w-6 h-6 text-gray-400" />
-
-
-
+      <img src={SearchIcon} alt="Search Icon" className="absolute right-6 top-2 w-[20px] h-[20px] text-gray-400" />
       <input
         type="text"
         placeholder="Search Pokemon..."

@@ -31,6 +31,28 @@ const starterPokemonUrls = [
   'https://pokeapi.co/api/v2/pokemon/816/',  // Sobble
 ];
 
+const typeColors = {
+  grass: 'bg-green-500 text-white',
+  fire: 'bg-red-500 text-white',
+  water: 'bg-blue-500 text-white',
+  bug: 'bg-green-800 text-white',
+  normal: 'bg-gray-400 text-black',
+  poison: 'bg-purple-500 text-white',
+  electric: 'bg-yellow-500 text-black',
+  ground: 'bg-yellow-700 text-white',
+  fairy: 'bg-pink-500 text-white',
+  fighting: 'bg-red-800 text-white',
+  psychic: 'bg-pink-700 text-white',
+  rock: 'bg-gray-700 text-white',
+  ghost: 'bg-purple-700 text-white',
+  ice: 'bg-blue-300 text-black',
+  dragon: 'bg-red-300 text-white',
+  dark: 'bg-gray-800 text-white',
+  steel: 'bg-gray-500 text-white',
+  flying: 'bg-blue-200 text-black',
+};
+
+
 const FeaturedPokemon = () => {
   const [featuredPokemon, setFeaturedPokemon] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -93,10 +115,20 @@ const FeaturedPokemon = () => {
                     <p>No official artwork available</p>
                   </div>
                 )}
-                <div className="text-center">
+                  <div className="text-center">
                   <p className="text-xl font-bold capitalize">{pokemon.name}</p>
-                  <p className="text-sm">Type: {pokemon.types.map((type) => type.type.name).join(', ')}</p>
-                  <p className="text-sm">Abilities: {pokemon.abilities.map((ability) => ability.ability.name).join(', ')}</p>
+                  <p className="text-sm">Type:</p>
+                  <div className="flex justify-center">
+                    {pokemon.types.map((type, i) => (
+                      <span
+                        key={i}
+                        className={`px-4 py-1 m-1 rounded ${typeColors[type.type.name]}`}
+                      >
+                        {type.type.name}
+                      </span>
+                    ))}
+                  </div>
+                  <p className="text-sm mt-2">Abilities: {pokemon.abilities.map((ability) => ability.ability.name).join(', ')}</p>
                 </div>
               </div>
             ))}
