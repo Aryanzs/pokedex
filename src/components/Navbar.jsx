@@ -1,25 +1,44 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from '../assets/logo1.png';
-import Search from './Search';
 
-const Navbar = ({ setSearchResultsVisible, setPokemonData, currentPage, setLoading }) => {
+const Navbar = ({ setSearchResultsVisible, setPokemonData, currentPage, setLoading, setSearchQuery }) => {
+  const [inputValue, setInputValue] = useState('');
+
+  const handleSearch = () => {
+    setSearchQuery(inputValue);
+    setSearchResultsVisible(true);
+  };
+
   return (
-    <nav className="bg-red-500 shadow-md py-4">
+    <nav className="fixed top-0 left-0 bg-red-500 right-0 backdrop-filter backdrop-blur-lg bg-opacity-20 shadow-md py-4 z-10">
       <div className="container mx-auto px-4 flex justify-between items-center">
         <div className="flex items-center space-x-2">
           <a href='/'>
             <img
               src={logo}
               alt="Logo"
-              className="h-14 w-14 shadow-lg hover:animate-move-left-right"
+              className="h-14 w-14 rounded-full shadow-lg hover:animate-move-left-right"
             />
           </a>
-          <div className="text-2xl font-bold"><a href='/'>Pokedex</a></div>
+          <div className="text-2xl font-bold text-red-500"><a href='/' className="hover:text-gray-200">Pokedex</a></div>
         </div>
         <div className="flex justify-center">
+          <input
+            type="text"
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            placeholder="Search Pokémon"
+            className="px-4 py-2 border rounded-md"
+          />
+          <button
+            onClick={handleSearch}
+            className="ml-2 px-4 py-2 bg-red-500 text-white rounded-md"
+          >
+            Search
+          </button>
         </div>
         <div className="flex space-x-4 justify-end">
-          <a href="#regions" className="text-gray-700 hover:text-gray-900">
+          <a href="#regions" className="text-red-500 hover:text-red-600">
             Regions
           </a>
           <a href="#about" className="text-gray-700 hover:text-gray-900">
