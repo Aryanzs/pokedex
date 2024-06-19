@@ -4,23 +4,21 @@ import Search from './Search';
 
 const Navbar = ({ setSearchResultsVisible, setPokemonData, currentPage, setLoading }) => {
   return (
-    <nav className="bg-white shadow-md py-4">
+    <nav className="bg-red-500 shadow-md py-4">
       <div className="container mx-auto px-4 flex justify-between items-center">
         <div className="flex items-center space-x-2">
-          <img
-            src={logo}
-            alt="Logo"
-            className="h-14 w-14 shadow-lg hover:animate-move-left-right"
-          />
-          <div className="text-2xl font-bold">Pokedex</div>
+          <a href='/'>
+            <img
+              src={logo}
+              alt="Logo"
+              className="h-14 w-14 shadow-lg hover:animate-move-left-right"
+            />
+          </a>
+          <div className="text-2xl font-bold"><a href='/'>Pokedex</a></div>
         </div>
-        <div className="flex space-x-4">
-          <Search
-            setSearchResultsVisible={setSearchResultsVisible}
-            setPokemonData={setPokemonData}
-            currentPage={currentPage}
-            setLoading={setLoading}
-          />
+        <div className="flex justify-center">
+        </div>
+        <div className="flex space-x-4 justify-end">
           <a href="#regions" className="text-gray-700 hover:text-gray-900">
             Regions
           </a>

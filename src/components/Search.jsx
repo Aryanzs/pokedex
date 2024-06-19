@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import SearchIcon from '../assets/search.png'; // Assuming you have a component for the search icon
+
 
 const Search = ({ setSearchResultsVisible, setPokemonData, currentPage, setLoading }) => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -22,7 +24,7 @@ const Search = ({ setSearchResultsVisible, setPokemonData, currentPage, setLoadi
             const officialArtworkUrl = pokemonData.sprites.other['official-artwork'].front_default;
             return {
               ...pokemonData,
-              officialArtworkUrl,
+              officialArtworkUrl,  
             };
           })
         );
@@ -47,14 +49,24 @@ const Search = ({ setSearchResultsVisible, setPokemonData, currentPage, setLoadi
   };
 
   return (
-    <div>
+    <div >
+      <div className="flex justify-center mt-3">
+      <div className="relative">
+      <img src={SearchIcon} alt="Search Icon" className="absolute right-6 top-2 w-6 h-6 text-gray-400" />
+
+
+
       <input
         type="text"
         placeholder="Search Pokemon..."
         value={searchTerm}
         onChange={(e) => handleSearch(e.target.value)}
-        className="px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="px-4 py-2 rounded-lg border-spacing-9 border-b-gray-600 shadow-lg"
       />
+              </div>
+
+        </div>
+
       {searchResults.length > 0 && (
         <div className="mt-4">
           {searchResults.map((pokemon, index) => (
