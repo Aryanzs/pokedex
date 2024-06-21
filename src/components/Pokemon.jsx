@@ -3,6 +3,8 @@ import axios from 'axios';
 import Navbar from './Navbar';
 import Next from './Next';
 import Spinner from './Spinner';
+import { Link } from 'react-router-dom';
+
 
 const Pokemon = () => {
   const [pokemonData, setPokemonData] = useState([]);
@@ -115,6 +117,7 @@ const Pokemon = () => {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {pokemonData.map((pokemon, index) => (
+
               <div key={index} className="bg-gray-300 rounded-lg p-4 shadow-xl relative transition-colors duration-300 hover:bg-gradient-to-b hover:from-red-500 hover:via-red-300 hover:to-zinc-200">
                 <button
                   className="absolute top-2 right-2 text-gray-800 rounded-full p-1 "
@@ -141,6 +144,8 @@ const Pokemon = () => {
                   </div>
                 ) : (
                   <div>
+                                  <Link to={`/pokemon/${pokemon.id}`} className="no-underline">
+
                     {pokemon.officialArtworkUrl ? (
                       <img
                         src={pokemon.officialArtworkUrl}
@@ -154,9 +159,13 @@ const Pokemon = () => {
                     )}
                     <p className="text-xl font-bold capitalize text-slate-800">{pokemon.name}</p>
                     <p className="text-sm text-gray-500">#{(currentPage - 1) * 20 + index + 1}</p>
+                    </Link>
+
                   </div>
                 )}
               </div>
+
+
             ))}
           </div>
         )}

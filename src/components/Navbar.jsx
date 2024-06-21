@@ -20,7 +20,7 @@ const Navbar = ({ setSearchResultsVisible, setPokemonData, currentPage, setLoadi
               className="h-14 w-14 rounded-full shadow-lg hover:animate-move-left-right"
             />
           </a>
-          <div className="text-2xl font-bold text-red-500"><a href='/' className="hover:text-gray-200">Pokedex</a></div>
+          <div className="text-2xl font-bold text-red-500"><a href='/' className="hover:text-black">Pokedex</a></div>
         </div>
         <div className="flex justify-center">
           <input

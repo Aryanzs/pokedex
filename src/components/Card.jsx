@@ -49,10 +49,6 @@ const Card = ({ pokemonId }) => {
     <div className="max-w-xs p-6 bg-red-500 text-white rounded-lg">
       <div className="flex flex-col space-y-2">
         <div className="flex justify-between">
-          <span className="font-semibold">Region</span>
-          <span>{region}</span>
-        </div>
-        <div className="flex justify-between">
           <span className="font-semibold">Attack</span>
           <span>{attackStat}</span>
         </div>
