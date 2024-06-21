@@ -3,7 +3,7 @@ import logo from '../assets/logo1.png';
 
 const Navbar = ({ setSearchResultsVisible, setPokemonData, currentPage, setLoading, setSearchQuery }) => {
   const [inputValue, setInputValue] = useState('');
-
+  
   const handleSearch = () => {
     setSearchQuery(inputValue);
     setSearchResultsVisible(true);
