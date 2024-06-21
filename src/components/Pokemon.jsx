@@ -117,7 +117,7 @@ const Pokemon = () => {
             {pokemonData.map((pokemon, index) => (
               <div key={index} className="bg-gray-300 rounded-lg p-4 shadow-xl relative transition-colors duration-300 hover:bg-gradient-to-b hover:from-red-500 hover:via-red-300 hover:to-zinc-200">
                 <button
-                  className="absolute top-2 right-2 text-gray-800 rounded-full p-1"
+                  className="absolute top-2 right-2 text-gray-800 rounded-full p-1 "
                   onClick={() => handleFlip(index)}
                 >
                   <i className="fas fa-info-circle "></i>
