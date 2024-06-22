@@ -5,11 +5,19 @@ import Pokemon from './components/Pokemon'
 import './styles.css'; // Adjust the path as per your project structure
 import FeaturedPokemon from './components/FeaturedPokemon';
 import PokeDetail from './components/PokeDetail';
+import PokemonProvider from './context/PokemonContext';
+import { HomeProvider } from './context/HomeContext';
+import Navbar from './components/Navbar';
 
 
 const App = () => {
   return (
+    <HomeProvider>
+    <PokemonProvider>
+
     <Router>
+    <Navbar/>
+
       <Routes>
         <Route path="/" element={
           <>
@@ -20,6 +28,8 @@ const App = () => {
         <Route path="/pokemon/:id" element={<PokeDetail />} />
       </Routes>
     </Router>
+    </PokemonProvider>
+    </HomeProvider>
   );
 };
 

@@ -46,7 +46,7 @@ const Card = ({ pokemonId }) => {
   const defenseStat = pokemon.stats.find(stat => stat.stat.name === 'defense')?.base_stat || 'N/A';
 
   return (
-    <div className="max-w-xs p-6 bg-red-500 text-white rounded-lg">
+    <div className="max-w-xs p-6 bg-red-500 rounded-lg shadow-2xl hover:shadow-lg hover:bg-red-700 text-white ">
       <div className="flex flex-col space-y-2">
         <div className="flex justify-between">
           <span className="font-semibold">Attack</span>
