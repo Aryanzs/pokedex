@@ -1,5 +1,6 @@
 .card {
-  max-width: 300px;
+  max-width: 430px;
+  margin-left:-100px;
   background-color: #d3d3d3;
   border-radius: 8px;
   overflow: hidden;
@@ -74,4 +75,8 @@
     transform: scale(1.2);
     opacity: 0;
   }
+}
+
+.shadow{
+  box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.2); /* Added box shadow */
 }
