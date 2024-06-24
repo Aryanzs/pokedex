@@ -2,135 +2,274 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import RarrowIcon from '../assets/Arrow_Right_Square-512.png'; // Replace with actual path to your uploaded image
 import LarrowIcon from '../assets/Arrow_Left_Square-512.png'; // Replace with actual path to your uploaded image
+import { Link } from 'react-router-dom';
+import Spinner from './Spinner';  // Import the Spinner component
 
-
-const starterPokemonUrls = [
-  'https://pokeapi.co/api/v2/pokemon/1/',  // Bulbasaur
-  'https://pokeapi.co/api/v2/pokemon/4/',  // Charmander
-  'https://pokeapi.co/api/v2/pokemon/7/',  // Squirtle
-  'https://pokeapi.co/api/v2/pokemon/152/',  // Chikorita
-  'https://pokeapi.co/api/v2/pokemon/155/',  // Cyndaquil
-  'https://pokeapi.co/api/v2/pokemon/158/',  // Totodile
-  'https://pokeapi.co/api/v2/pokemon/252/',  // Treecko
-  'https://pokeapi.co/api/v2/pokemon/255/',  // Torchic
-  'https://pokeapi.co/api/v2/pokemon/258/',  // Mudkip
-  'https://pokeapi.co/api/v2/pokemon/387/',  // Turtwig
-  'https://pokeapi.co/api/v2/pokemon/390/',  // Chimchar
-  'https://pokeapi.co/api/v2/pokemon/393/',  // Piplup
-  'https://pokeapi.co/api/v2/pokemon/495/',  // Snivy
-  'https://pokeapi.co/api/v2/pokemon/498/',  // Tepig
-  'https://pokeapi.co/api/v2/pokemon/501/',  // Oshawott
-  'https://pokeapi.co/api/v2/pokemon/650/',  // Chespin
-  'https://pokeapi.co/api/v2/pokemon/653/',  // Fennekin
-  'https://pokeapi.co/api/v2/pokemon/656/',  // Froakie
-  'https://pokeapi.co/api/v2/pokemon/722/',  // Rowlet
-  'https://pokeapi.co/api/v2/pokemon/725/',  // Litten
-  'https://pokeapi.co/api/v2/pokemon/728/',  // Popplio
-  'https://pokeapi.co/api/v2/pokemon/810/',  // Grookey
-  'https://pokeapi.co/api/v2/pokemon/813/',  // Scorbunny
-  'https://pokeapi.co/api/v2/pokemon/816/',  // Sobble
-];
-
-const typeColors = {
-  grass: 'bg-green-500 text-white',
-  fire: 'bg-red-500 text-white',
-  water: 'bg-blue-500 text-white',
-  bug: 'bg-green-800 text-white',
-  normal: 'bg-gray-400 text-black',
-  poison: 'bg-purple-500 text-white',
-  electric: 'bg-yellow-500 text-black',
-  ground: 'bg-yellow-700 text-white',
-  fairy: 'bg-pink-500 text-white',
-  fighting: 'bg-red-800 text-white',
-  psychic: 'bg-pink-700 text-white',
-  rock: 'bg-gray-700 text-white',
-  ghost: 'bg-purple-700 text-white',
-  ice: 'bg-blue-300 text-black',
-  dragon: 'bg-red-300 text-white',
-  dark: 'bg-gray-800 text-white',
-  steel: 'bg-gray-500 text-white',
-  flying: 'bg-blue-200 text-black',
+const pokemonCategories = {
+  starter: {
+    title: "Starter Pokémon",
+    urls: [
+      'https://pokeapi.co/api/v2/pokemon/1/',  // Bulbasaur
+      'https://pokeapi.co/api/v2/pokemon/4/',  // Charmander
+      'https://pokeapi.co/api/v2/pokemon/7/',  // Squirtle
+      'https://pokeapi.co/api/v2/pokemon/152/',  // Chikorita
+      'https://pokeapi.co/api/v2/pokemon/155/',  // Cyndaquil
+      'https://pokeapi.co/api/v2/pokemon/158/',  // Totodile
+      'https://pokeapi.co/api/v2/pokemon/252/',  // Treecko
+      'https://pokeapi.co/api/v2/pokemon/255/',  // Torchic
+      'https://pokeapi.co/api/v2/pokemon/258/',  // Mudkip
+      'https://pokeapi.co/api/v2/pokemon/387/',  // Turtwig
+      'https://pokeapi.co/api/v2/pokemon/390/',  // Chimchar
+      'https://pokeapi.co/api/v2/pokemon/393/',  // Piplup
+      'https://pokeapi.co/api/v2/pokemon/495/',  // Snivy
+      'https://pokeapi.co/api/v2/pokemon/498/',  // Tepig
+      'https://pokeapi.co/api/v2/pokemon/501/',  // Oshawott
+      'https://pokeapi.co/api/v2/pokemon/650/',  // Chespin
+      'https://pokeapi.co/api/v2/pokemon/653/',  // Fennekin
+      'https://pokeapi.co/api/v2/pokemon/656/',  // Froakie
+      'https://pokeapi.co/api/v2/pokemon/722/',  // Rowlet
+      'https://pokeapi.co/api/v2/pokemon/725/',  // Litten
+      'https://pokeapi.co/api/v2/pokemon/728/',  // Popplio
+      'https://pokeapi.co/api/v2/pokemon/810/',  // Grookey
+      'https://pokeapi.co/api/v2/pokemon/813/',  // Scorbunny
+      'https://pokeapi.co/api/v2/pokemon/816/',  // Sobble
+    ]
+  },
+  legendary: {
+    title: "Legendary Pokémon",
+    urls: [
+      'https://pokeapi.co/api/v2/pokemon/144/', // Articuno
+      'https://pokeapi.co/api/v2/pokemon/145/', // Zapdos
+      'https://pokeapi.co/api/v2/pokemon/146/', // Moltres
+      'https://pokeapi.co/api/v2/pokemon/150/', // Mewtwo
+      'https://pokeapi.co/api/v2/pokemon/243/', // Raikou
+      'https://pokeapi.co/api/v2/pokemon/244/', // Entei
+      'https://pokeapi.co/api/v2/pokemon/245/', // Suicune
+      'https://pokeapi.co/api/v2/pokemon/249/', // Lugia
+      'https://pokeapi.co/api/v2/pokemon/250/', // Ho-Oh
+      'https://pokeapi.co/api/v2/pokemon/380/', // Latias
+      'https://pokeapi.co/api/v2/pokemon/381/', // Latios
+      'https://pokeapi.co/api/v2/pokemon/382/', // Kyogre
+      'https://pokeapi.co/api/v2/pokemon/383/', // Groudon
+      'https://pokeapi.co/api/v2/pokemon/384/', // Rayquaza
+      'https://pokeapi.co/api/v2/pokemon/486/', // Regigigas
+      'https://pokeapi.co/api/v2/pokemon/487/', // Giratina
+      'https://pokeapi.co/api/v2/pokemon/638/', // Cobalion
+      'https://pokeapi.co/api/v2/pokemon/639/', // Terrakion
+      'https://pokeapi.co/api/v2/pokemon/640/', // Virizion
+      'https://pokeapi.co/api/v2/pokemon/641/', // Tornadus
+      'https://pokeapi.co/api/v2/pokemon/642/', // Thundurus
+      'https://pokeapi.co/api/v2/pokemon/643/', // Reshiram
+      'https://pokeapi.co/api/v2/pokemon/644/', // Zekrom
+      'https://pokeapi.co/api/v2/pokemon/645/', // Landorus
+      'https://pokeapi.co/api/v2/pokemon/646/', // Kyurem
+      'https://pokeapi.co/api/v2/pokemon/716/', // Xerneas
+      'https://pokeapi.co/api/v2/pokemon/717/', // Yveltal
+      'https://pokeapi.co/api/v2/pokemon/718/', // Zygarde
+      'https://pokeapi.co/api/v2/pokemon/777/', // Togekiss
+      'https://pokeapi.co/api/v2/pokemon/785/', // Tapu Koko
+      'https://pokeapi.co/api/v2/pokemon/786/', // Tapu Lele
+      'https://pokeapi.co/api/v2/pokemon/787/', // Tapu Bulu
+      'https://pokeapi.co/api/v2/pokemon/788/', // Tapu Fini
+      'https://pokeapi.co/api/v2/pokemon/800/', // Necrozma
+      'https://pokeapi.co/api/v2/pokemon/888/', // Zacian
+      'https://pokeapi.co/api/v2/pokemon/889/', // Zamazenta
+      'https://pokeapi.co/api/v2/pokemon/890/', // Eternatus
+    ]
+  },
+  mythical: {
+    title: "Mythical Pokémon",
+    urls: [
+      'https://pokeapi.co/api/v2/pokemon/151/', // Mew
+      'https://pokeapi.co/api/v2/pokemon/251/', // Celebi
+      'https://pokeapi.co/api/v2/pokemon/385/', // Jirachi
+      'https://pokeapi.co/api/v2/pokemon/386/', // Deoxys
+      'https://pokeapi.co/api/v2/pokemon/489/', // Phione
+      'https://pokeapi.co/api/v2/pokemon/490/', // Manaphy
+      'https://pokeapi.co/api/v2/pokemon/491/', // Darkrai
+      'https://pokeapi.co/api/v2/pokemon/492/', // Shaymin
+      'https://pokeapi.co/api/v2/pokemon/493/', // Arceus
+      'https://pokeapi.co/api/v2/pokemon/494/', // Victini
+      'https://pokeapi.co/api/v2/pokemon/638/', // Cobalion
+      'https://pokeapi.co/api/v2/pokemon/639/', // Terrakion
+      'https://pokeapi.co/api/v2/pokemon/640/', // Virizion
+      'https://pokeapi.co/api/v2/pokemon/647/', // Keldeo
+      'https://pokeapi.co/api/v2/pokemon/648/', // Meloetta
+      'https://pokeapi.co/api/v2/pokemon/649/', // Genesect
+      'https://pokeapi.co/api/v2/pokemon/721/', // Volcanion
+      'https://pokeapi.co/api/v2/pokemon/801/', // Magearna
+      'https://pokeapi.co/api/v2/pokemon/802/', // Marshadow
+      'https://pokeapi.co/api/v2/pokemon/807/', // Zeraora
+      'https://pokeapi.co/api/v2/pokemon/808/', // Meltan
+      'https://pokeapi.co/api/v2/pokemon/809/', // Melmetal
+      'https://pokeapi.co/api/v2/pokemon/897/', // Zarude
+      'https://pokeapi.co/api/v2/pokemon/898/', // Regieleki
+      'https://pokeapi.co/api/v2/pokemon/899/', // Regidrago
+    ]
+  },
+  pseudo: {
+    title: "Pseudo-Legendary Pokémon",
+    urls: [
+      'https://pokeapi.co/api/v2/pokemon/149/', // Dragonite
+      'https://pokeapi.co/api/v2/pokemon/248/', // Tyranitar
+      'https://pokeapi.co/api/v2/pokemon/373/', // Salamence
+      'https://pokeapi.co/api/v2/pokemon/376/', // Metagross
+      'https://pokeapi.co/api/v2/pokemon/445/', // Garchomp
+      'https://pokeapi.co/api/v2/pokemon/635/', // Hydreigon
+      'https://pokeapi.co/api/v2/pokemon/706/', // Goodra
+      'https://pokeapi.co/api/v2/pokemon/784/', // Kommo-o
+    ]
+  },
+  eeveelutions: {
+    title: "Eevee Evolutions",
+    urls: [
+      'https://pokeapi.co/api/v2/pokemon/133/', // Eevee
+      'https://pokeapi.co/api/v2/pokemon/134/', // Vaporeon
+      'https://pokeapi.co/api/v2/pokemon/135/', // Jolteon
+      'https://pokeapi.co/api/v2/pokemon/136/', // Flareon
+      'https://pokeapi.co/api/v2/pokemon/196/', // Espeon
+      'https://pokeapi.co/api/v2/pokemon/197/', // Umbreon
+      'https://pokeapi.co/api/v2/pokemon/470/', // Leafeon
+      'https://pokeapi.co/api/v2/pokemon/471/', // Glaceon
+      'https://pokeapi.co/api/v2/pokemon/700/', // Sylveon
+    ]
+  }
 };
 
-
+const typeColors = {
+  normal: 'bg-gray-400 text-black',
+  fire: 'bg-red-500 text-white',
+  water: 'bg-blue-500 text-white',
+  electric: 'bg-yellow-400 text-black',
+  grass: 'bg-green-500 text-white',
+  ice: 'bg-blue-200 text-black',
+  fighting: 'bg-red-700 text-white',
+  poison: 'bg-purple-500 text-white',
+  ground: 'bg-yellow-600 text-white',
+  flying: 'bg-indigo-300 text-black',
+  psychic: 'bg-pink-500 text-white',
+  bug: 'bg-green-600 text-white',
+  rock: 'bg-yellow-700 text-white',
+  ghost: 'bg-purple-700 text-white',
+  dragon: 'bg-indigo-600 text-white',
+  dark: 'bg-gray-700 text-white',
+  steel: 'bg-gray-400 text-black',
+  fairy: 'bg-pink-300 text-black',
+};
 const FeaturedPokemon = () => {
   const [featuredPokemon, setFeaturedPokemon] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [selectedCategory, setSelectedCategory] = useState('starter');
+  const [isLoading, setIsLoading] = useState(true);  // New state for loading
 
   const fetchPokemonDetails = async (urls) => {
-    const pokemonDetails = await Promise.all(
-      urls.map(async (url) => {
-        const response = await axios(url);
-        const pokemonData = response.data;
-        const officialArtworkUrl = pokemonData.sprites.other['official-artwork'].front_default;
-        return {
-          ...pokemonData,
-          officialArtworkUrl,
-        };
-      })
-    );
-    setFeaturedPokemon(pokemonDetails);
+    setIsLoading(true);  // Set loading to true when fetching starts
+    try {
+      const pokemonDetails = await Promise.all(
+        urls.map(async (url) => {
+          const response = await axios(url);
+          const pokemonData = response.data;
+          const officialArtworkUrl = pokemonData.sprites.other['official-artwork'].front_default;
+          return {
+            ...pokemonData,
+            officialArtworkUrl,
+          };
+        })
+      );
+      setFeaturedPokemon(pokemonDetails);
+    } catch (error) {
+      console.error("Error fetching Pokemon details:", error);
+    } finally {
+      setIsLoading(false);  // Set loading to false when fetching is done
+    }
   };
 
   useEffect(() => {
-    fetchPokemonDetails(starterPokemonUrls);
-  }, []);
+    fetchPokemonDetails(pokemonCategories[selectedCategory].urls);
+  }, [selectedCategory]);
 
   const handlePrevClick = () => {
-    setCurrentIndex((prevIndex) => (prevIndex === 0 ? featuredPokemon.length - 1 : prevIndex - 1));
+    setCurrentIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : featuredPokemon.length - 1));
   };
 
   const handleNextClick = () => {
-    setCurrentIndex((prevIndex) => (prevIndex === featuredPokemon.length - 1 ? 0 : prevIndex + 1));
+    setCurrentIndex((prevIndex) => (prevIndex < featuredPokemon.length - 1 ? prevIndex + 1 : 0));
   };
 
+  const handleCategoryChange = (event) => {
+    setSelectedCategory(event.target.value);
+    setCurrentIndex(0);
+  };
+
+  if (isLoading) {
+    return <Spinner/>;  // Show the Spinner while loading
+  }
+
   return (
-    <div className="relative bg-gray-800 py-8">
-      <h2 className="text-3xl font-bold text-white mb-4 px-8">Starter Pokémon`s</h2>
+    <div className="relative bg-gray-800 py-8 px-12">
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-3xl font-bold text-white">{pokemonCategories[selectedCategory].title}</h2>
+        <select
+          className="bg-white text-gray-800 px-4 py-2 rounded"
+          value={selectedCategory}
+          onChange={handleCategoryChange}
+        >
+          {Object.keys(pokemonCategories).map((category) => (
+            <option key={category} value={category}>
+              {pokemonCategories[category].title}
+            </option>
+          ))}
+        </select>
+      </div>
       <div className="relative group">
         <button
           className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white text-white p-2 rounded-full shadow-lg z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
           onClick={handlePrevClick}
         >
-          <img src={LarrowIcon} alt="Previous" className="w-9 h-9 " />
+          <img src={LarrowIcon} alt="Previous" className="w-9 h-9" />
         </button>
-        <div className="overflow-hidden px-8">
+        <div className="overflow-hidden">
           <div
             className="flex transition-transform duration-500"
-            style={{ transform: `translateX(-${currentIndex * (100 / 6)}%)` }}
+            style={{ transform: `translateX(-${currentIndex * (100 / 3)}%)` }}
           >
             {featuredPokemon.map((pokemon, index) => (
-              <div
+              <Link
                 key={index}
-                className="min-w-[16.67%] flex-shrink-0 flex items-center justify-center bg-gray-700 text-white rounded-lg p-4 shadow-xl m-2"
+                to={`/pokemon/${pokemon.id}`}
+                className="min-w-[33.33%] flex-shrink-0 flex items-center justify-center bg-gray-700 text-white rounded-lg p-4 shadow-xl m-2 no-underline"
               >
-                {pokemon.officialArtworkUrl ? (
-                  <img
-                    src={pokemon.officialArtworkUrl}
-                    alt={pokemon.name}
-                    className="w-full h-64 object-contain mb-2"
-                  />
-                ) : (
-                  <div className="h-64 flex items-center justify-center bg-gray-600 mb-2">
-                    <p>No official artwork available</p>
-                  </div>
-                )}
+                <div className="w-full">
+                  {pokemon.officialArtworkUrl ? (
+                    <img
+                      src={pokemon.officialArtworkUrl}
+                      alt={pokemon.name}
+                      className="w-full h-64 object-contain mb-2"
+                    />
+                  ) : (
+                    <div className="h-64 flex items-center justify-center bg-gray-600 mb-2">
+                      <p>No official artwork available</p>
+                    </div>
+                  )}
                   <div className="text-center">
-                  <p className="text-xl font-bold capitalize">{pokemon.name}</p>
-                  <p className="text-sm">Type:</p>
-                  <div className="flex justify-center">
-                    {pokemon.types.map((type, i) => (
-                      <span
-                        key={i}
-                        className={`px-4 py-1 m-1 rounded ${typeColors[type.type.name]}`}
-                      >
-                        {type.type.name}
-                      </span>
-                    ))}
+                    <p className="text-xl font-bold capitalize">{pokemon.name}</p>
+                    <p className="text-sm">Type:</p>
+                    <div className="flex justify-center flex-wrap">
+                      {pokemon.types.map((type, i) => (
+                        <span
+                          key={i}
+                          className={`px-4 py-1 m-1 rounded ${typeColors[type.type.name]}`}
+                        >
+                          {type.type.name}
+                        </span>
+                      ))}
+                    </div>
+                    <p className="text-sm mt-2">
+                      Abilities: {pokemon.abilities.map((ability) => ability.ability.name).join(', ')}
+                    </p>
                   </div>
-                  <p className="text-sm mt-2">Abilities: {pokemon.abilities.map((ability) => ability.ability.name).join(', ')}</p>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

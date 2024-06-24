@@ -1,31 +1,31 @@
 .card {
+  width: 100%;
   max-width: 430px;
-  margin-left:-100px;
+  margin: 90px auto 0;
   background-color: #d3d3d3;
   border-radius: 8px;
   overflow: hidden;
   position: relative;
-  margin-top: 90px;
   animation: color-change-animation 2s infinite cubic-bezier(0.22, 0.61, 0.36, 1);
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Added box shadow */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .image-container {
   overflow: hidden;
   position: relative;
   width: 100%;
-  max-width: 600px; /* Adjust as needed */
-  margin: 0 auto; /* Center the container */
+  max-width: 100%;
+  margin: 0 auto;
 }
 
 .image-container img {
   width: 100%;
+  height: auto;
   display: block;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   position: relative;
   animation: comeOutOfScreen 2s forwards;
-  /* Initially hide the image off-screen */
   transform: translateY(100vh);
   opacity: 0;
 }
@@ -50,19 +50,18 @@
   height: 100%;
   border-radius: 50%;
   border: 5px solid rgba(255, 227, 227, 0.5);
-  animation:  pulse-ring  2s infinite cubic-bezier(0.22, 0.61, 0.36, 1);
+  animation: pulse-ring 2s infinite cubic-bezier(0.22, 0.61, 0.36, 1);
 }
-
 
 @keyframes color-change-animation {
   0% {
-    background-color: rgba(255, 246, 73, 0.5); /* Starting color */
+    background-color: rgba(255, 246, 73, 0.5);
   }
   50% {
-    background-color: rgba(255, 151, 54, 0.5); /* Midway color */
+    background-color: rgba(255, 151, 54, 0.5);
   }
   100% {
-    background-color: rgba(255, 132, 44, 0.5); /* Ending color */
+    background-color: rgba(255, 132, 44, 0.5);
   }
 }
 
@@ -77,6 +76,40 @@
   }
 }
 
-.shadow{
-  box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.2); /* Added box shadow */
+.shadow {
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Media Queries for Responsiveness */
+@media (min-width: 640px) {
+  .card {
+    margin-left: -50px;
+  }
+}
+
+@media (min-width: 768px) {
+  .card {
+    margin-left: -75px;
+  }
+  
+  .image-container {
+    max-width: 500px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .card {
+    margin-left: -100px;
+    max-width: 430px;
+  }
+  
+  .image-container {
+    max-width: 600px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .card {
+    max-width: 500px;
+  }
 }

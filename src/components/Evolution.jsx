@@ -52,10 +52,12 @@ export const Evolution = ({ pokemonId }) => {
 
           const pokemonTypes = pokemonData.types.map(type => type.type.name);
 
+          const sprite = pokemonData.sprites.versions['generation-v']['black-white'].animated.front_default || pokemonData.sprites.front_default;
+
           evoData.push({
             name: pokemonData.name,
             id: pokemonId,
-            sprite: pokemonData.sprites.versions['generation-v']['black-white'].animated.front_default,
+            sprite: sprite,
             types: pokemonTypes,
           });
 
@@ -97,17 +99,17 @@ export const Evolution = ({ pokemonId }) => {
       <h1 className="text-4xl font-bold flex py-8 justify-center">Evolution</h1>
 
       <motion.section
-        className="relative overflow-hidden px-4  text-gray-200"
+        className="relative overflow-hidden px-4 text-gray-200"
       >
         <div className="flex justify-center items-center mb-24 relative">
-          <div className="relative flex gap-8 mt-11 bg-gray-800 h-[300px] p-6 rounded-lg z-10 overflow-hidden">
+          <div className="relative flex flex-wrap justify-center gap-8 mt-11 bg-gray-800 h-auto p-6 rounded-lg z-10 overflow-hidden">
             <div className="absolute inset-0 z-0">
               <Canvas className="w-full h-full">
                 <StarsComponent />
               </Canvas>
             </div>
             {evolutionData.map((pokemon, index) => (
-              <div key={index} className="text-center ml-10 mr-10 text-white relative z-10">
+              <div key={index} className="text-center ml-4 mr-4 mb-4 text-white relative z-10">
                 <img
                   className="w-32 h-32 mt-8 rounded-full border-2 bg-slate-900 border-white mx-auto"
                   src={pokemon.sprite}
