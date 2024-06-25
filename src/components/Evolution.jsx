@@ -96,13 +96,13 @@ export const Evolution = ({ pokemonId }) => {
 
   return (
     <>
-      <h1 className="text-4xl font-bold flex py-8 justify-center">Evolution</h1>
+      <h1 className="text-4xl font-bold flex text-rose-400  py-8 justify-center">Evolution</h1>
 
       <motion.section
-        className="relative overflow-hidden px-4 text-gray-200"
+        className="relative overflow-hidden  px-4 text-gray-200"
       >
         <div className="flex justify-center items-center mb-24 relative">
-          <div className="relative flex flex-wrap justify-center gap-8 mt-11 bg-gray-800 h-auto p-6 rounded-lg z-10 overflow-hidden">
+          <div className="relative flex flex-wrap justify-center gap-8  bg-gray-700 h-auto p-6 rounded-lg z-10 overflow-hidden">
             <div className="absolute inset-0 z-0">
               <Canvas className="w-full h-full">
                 <StarsComponent />

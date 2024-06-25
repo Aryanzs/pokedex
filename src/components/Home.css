@@ -1,0 +1,136 @@
+#textblock {
+    background-color: #fafafa;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  #textblock-content-container {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    max-width: 1200px;
+  }
+  
+  #textblock-container {
+    width: 45%;
+    margin: 20px;
+    padding: 20px;
+    margin-top: 150px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  #textblock-title {
+    color: #ff1b1b;
+    margin-top: 100px;
+    font-size: 35px;
+    font-weight: 600;
+    font-family: "Helvetica Neue";
+    text-align: center;
+  }
+  
+  #textblock-content {
+    color: #ff5100;
+    font-size: 20px;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  #textblock-gif {
+    width: 600px;
+    height: 600px;
+    border-radius: 10px;
+  }
+  
+  @media (max-width: 768px) {
+    #textblock-content-container {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    #textblock-container {
+      width: 90%;
+    }
+  
+    #textblock-gif {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+  
+  .animation, .animation_layer {
+    height: 1000px;
+  }
+  
+  .animation {
+    display: block;
+    position: relative;
+    z-index: 10;
+  }
+  
+  .animation_layer {
+    background-position: bottom center;
+    background-size: auto 1038px;
+    background-repeat: repeat-x;
+    width: 100%;
+    position: absolute;
+  }
+  
+  .animation_layer.parallax {
+    position: fixed;
+  }
+  
+  .parallax-container {
+    margin-top: 70px; /* Adjust this value based on the height of your navbar */
+  }
+  
+  #artback {
+    background-image: url('../assets/images/background.jpg');
+  }
+  
+  #mountain {
+    background-image: url('../assets/images/skyup.png');
+
+  }
+  
+  #logoland {
+    background-image: url('../assets/images/Group 1.png');
+
+  }
+  
+  #jungle1 {
+    background-image: url('../assets/images/rainbow.png');
+
+  }
+  
+  #jungle2 {
+    background-image: url('../assets/images/cloud.png');
+
+  }
+  
+  #jungle3 {
+    background-image: url('../assets/images/rightgrass.png');
+
+  }
+  
+  #jungle4 {
+    background-image: url('../assets/images/leftgrass.png');
+
+  }
+  
+  #manonmountain {
+    background-image: url('../assets/images/manonmountain.png');
+
+  }
+  
+  #jungle5 {
+    background-image: url('../assets/images/ash.png');
+
+  }
+  

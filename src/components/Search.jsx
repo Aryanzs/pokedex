@@ -115,7 +115,7 @@ const Search = () => {
       />
       <button
         type="submit"
-        className="ml-2 px-4 py-2 bg-red-500 text-white rounded-md search-button"
+        className="ml-2 px-4 py-2 bg-red-500 hover:bg-rose-700 text-white rounded-md search-button"
       >
         Search
       </button>
