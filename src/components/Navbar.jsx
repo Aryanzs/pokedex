@@ -1,5 +1,6 @@
 import React from 'react';
 import logo from '../assets/logo1.png';
+import { Link } from 'react-router-dom';
 
 
 const Navbar = () => {
@@ -21,17 +22,15 @@ const Navbar = () => {
 
         {/* Search Component */}
 
-        <div className="flex space-x-4 justify-end">
-          <a href="#regions" className="text-red-500 hover:text-red-600">
+        <div className="flex space-x-4 text-lg font-bold ">
+          <Link to="/region" className="text-red-500 hover:text-red-600">
             Regions
-          </a>
-          <a href="#about" className="text-gray-700 hover:text-gray-900">
-            About Us
-          </a>
-          <a href="#games" className="text-gray-700 hover:text-gray-900">
-            Games
-          </a>
+          </Link>
+          <Link to="/type" className="text-red-500 hover:text-red-600">
+            Type
+          </Link>
         </div>
+  
       </div>
     </nav>
   );
