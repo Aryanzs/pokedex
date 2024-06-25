@@ -1,5 +1,5 @@
 import './Home.css';
-import charizard from '../assets/images/wamp.gif'
+import gengar from '../assets/images/wamp.gif'
 
 function TextBlock() {
     return (
@@ -16,8 +16,8 @@ function TextBlock() {
                 <div id="textblock-container">
                     <img
                         id="textblock-gif"
-                        src={charizard}
-                        alt="Pokemon Charizard GIF"
+                        src={gengar}
+                        alt="Pokemon gengar GIF"
                     />
                 </div>
             </div>
