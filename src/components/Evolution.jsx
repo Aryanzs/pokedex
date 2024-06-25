@@ -3,6 +3,7 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import React, { useEffect, useState, useRef } from "react";
 import { motion, useMotionValue, animate } from "framer-motion";
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const typeColors = {
   grass: 'bg-green-500 text-white',
@@ -110,11 +111,15 @@ export const Evolution = ({ pokemonId }) => {
             </div>
             {evolutionData.map((pokemon, index) => (
               <div key={index} className="text-center ml-4 mr-4 mb-4 text-white relative z-10">
+                                    <Link to={`/pokemon/${pokemon.id}`} className="no-underline">
+
                 <img
                   className="w-32 h-32 mt-8 rounded-full border-2 bg-slate-900 border-white mx-auto"
                   src={pokemon.sprite}
                   alt={pokemon.name}
                 />
+                                    </Link>
+
                 <h3 className="mt-4 capitalize">{pokemon.name} <span className="text-gray-400">#{pokemon.id.toString().padStart(4, '0')}</span></h3>
                 <div className="flex justify-center mt-2 space-x-2">
                   {pokemon.types.map((type, typeIndex) => (
