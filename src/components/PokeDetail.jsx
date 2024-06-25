@@ -85,7 +85,7 @@ const PokeDetail = () => {
               <h2 className="text-xl text-rose-400 font-bold mb-2">Type and Region:</h2>
               <div className="flex flex-wrap justify-center gap-2">
                 <div className="flex items-center">
-                  <span className="font-semibold mr-1">Type:</span>
+                  <span className="font-semibold mr-1 text-rose-800">Type:</span>
                   {pokemonTypes.map((type) => (
                     <span key={type} className={`px-3 py-1 ml-2 rounded-lg shadow text-sm ${typeColors[type.toLowerCase()]}`}>
                       {type.charAt(0).toUpperCase() + type.slice(1)}
@@ -93,7 +93,7 @@ const PokeDetail = () => {
                   ))}
                 </div>
                 <div className="flex items-center">
-                  <span className="font-semibold mr-1">Region:</span>
+                  <span className="font-semibold mr-1 text-rose-800">Region:</span>
                   <span className={`px-3 py-1 rounded-lg shadow text-sm ${regionColors[region.toLowerCase()]}`}>
                     {region.charAt(0).toUpperCase() + region.slice(1)}
                   </span>
@@ -107,7 +107,7 @@ const PokeDetail = () => {
         {/* Right Column */}
         <div className="space-y-1">
           <div className="bg-white rounded-lg p-6 ">
-            <p className="text-lg mb-4">{versionDescription}</p>
+            <p className="text-lg mb-4 text-rose-800">{versionDescription}</p>
             <div className="flex flex-wrap items-center gap-4">
               <span className="font-semibold text-rose-400">Version:</span>
               <div className="flex flex-wrap gap-2">
@@ -134,7 +134,7 @@ const PokeDetail = () => {
               <h2 className="text-2xl text-rose-400 font-bold mb-4">Weaknesses</h2>
               <div className="space-y-4">
                 <div>
-                  <h3 className="font-semibold mb-2">Double Damage From:</h3>
+                  <h3 className="font-semibold mb-2 text-rose-800">Double Damage From:</h3>
                   <div className="flex flex-wrap gap-2">
                     {doubleDamageFrom.length > 0 ? (
                       doubleDamageFrom.map((type) => (
@@ -143,12 +143,12 @@ const PokeDetail = () => {
                         </span>
                       ))
                     ) : (
-                      <p className="text-gray-500">No notable weaknesses.</p>
+                      <p className=" text-rose-300">No notable weaknesses.</p>
                     )}
                   </div>
                 </div>
                 <div>
-                  <h3 className="font-semibold mb-2">Half Damage From:</h3>
+                  <h3 className="font-semibold mb-2 text-rose-800">Half Damage From:</h3>
                   <div className="flex flex-wrap gap-2">
                     {halfDamageFrom.length > 0 ? (
                       halfDamageFrom.map((type) => (
@@ -157,7 +157,7 @@ const PokeDetail = () => {
                         </span>
                       ))
                     ) : (
-                      <p className="text-gray-500">No notable resistances.</p>
+                      <p className="text-rose-300">No notable resistances.</p>
                     )}
                   </div>
                 </div>
@@ -166,7 +166,7 @@ const PokeDetail = () => {
             <div className="bg-white rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow">
               <h2 className="text-2xl text-rose-400 font-bold mb-4">Strengths</h2>
               <div>
-                <h3 className="font-semibold mb-2">Double Damage To:</h3>
+                <h3 className="font-semibold mb-2 text-rose-800">Double Damage To:</h3>
                 <div className="flex flex-wrap gap-2">
                   {doubleDamageTo.length > 0 ? (
                     doubleDamageTo.map((type) => (
