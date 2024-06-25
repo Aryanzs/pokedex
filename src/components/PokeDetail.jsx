@@ -11,6 +11,8 @@ import { Evolution } from './Evolution';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import Spinner from './Spinner';
+import { Link } from 'react-router-dom';
+
 
 const imageArray = [
   { name: 'red', src: red, alt: 'Red version' },
@@ -71,6 +73,7 @@ const PokeDetail = () => {
         <>
     <Navbar/>
     <div className="container mx-auto px-4 py-8 bg-slate-50 pt-24 ">
+     <Link to="/pokemon"> <button className="ml-5 px-4 py-2 mt-5 bg-red-500 hover:bg-rose-700 text-white rounded-md">Goback</button></Link>
       <h1 className="text-4xl md:text-6xl font-bold text-rose-600 text-center mb-8 pt-10 pb-6">
         <i>{pokemonData?.name.charAt(0).toUpperCase() + pokemonData?.name.slice(1)}</i>
       </h1>

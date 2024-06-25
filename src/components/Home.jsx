@@ -22,10 +22,10 @@ function Home() {
         <ParallaxLayer offset={0} speed={0.35}>
           <div class="animation_layer parallax" id="jungle2"></div>
         </ParallaxLayer>
-        <ParallaxLayer offset={0} speed={0.5}>
+        <ParallaxLayer offset={0} speed={0.39}>
           <div class="animation_layer parallax" id="jungle3"></div>
         </ParallaxLayer>
-        <ParallaxLayer offset={0} speed={0.45}>
+        <ParallaxLayer offset={0} speed={0.40}>
           <div class="animation_layer parallax" id="jungle4"></div>
         </ParallaxLayer>
         <ParallaxLayer offset={0} speed={0.40}>
