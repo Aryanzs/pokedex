@@ -5,6 +5,7 @@ import Navbar from './Navbar';
 import Next from './Next';
 import Spinner from './Spinner';
 import Search from './Search';
+import Footer from './Footer';
 
 
 const Pokemon = () => {
@@ -18,6 +19,7 @@ const Pokemon = () => {
   } = usePokemon();
 
   return (
+    <>
     <div className="min-h-screen bg-gray-100 mt-24">
 
       <div className="p-8">
@@ -25,12 +27,13 @@ const Pokemon = () => {
           <Spinner />
         ) : (
         <>
+        <Navbar/>
         <Search/>
           <div className="grid grid-cols-1 md:grid-cols-2 mt-10 lg:grid-cols-4 gap-4">
             {pokemonData.map((pokemon, index) => (
-              <div key={index} className="bg-gray-300 rounded-lg p-4 shadow-xl relative transition-colors duration-300 hover:bg-gradient-to-b hover:from-red-500 hover:via-red-300 hover:to-zinc-200">
+              <div key={index} className="bg-gray-200 rounded-lg p-4 shadow-xl relative transition-colors duration-300 hover:bg-gradient-to-b hover:from-red-400 hover:via-red-300 hover:to-zinc-200">
                 <button
-                  className="absolute top-2 right-2 text-gray-800 rounded-full p-1"
+                  className="absolute top-2 right-2 text-red-800 rounded-full p-1"
                   onClick={() => handleFlip(index)}
                 >
                   <i className="fas fa-info-circle"></i>
@@ -66,8 +69,8 @@ const Pokemon = () => {
                           <p>No official artwork available</p>
                         </div>
                       )}
-                      <p className="text-xl font-bold capitalize text-slate-800">{pokemon.name}</p>
-                      <p className="text-sm text-gray-500">#{(currentPage - 1) * 20 + index + 1}</p>
+                      <p className="text-xl font-bold capitalize text-rose-600">{pokemon.name}</p>
+                      <p className="text-sm text-rose-400">#{(currentPage - 1) * 20 + index + 1}</p>
                     </Link>
                   </div>
                 )}
@@ -81,6 +84,8 @@ const Pokemon = () => {
       </div>
       
     </div>
+    <Footer/>
+    </>
   );
 };
 

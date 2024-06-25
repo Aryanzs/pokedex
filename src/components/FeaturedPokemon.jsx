@@ -4,6 +4,9 @@ import RarrowIcon from '../assets/Arrow_Right_Square-512.png'; // Replace with a
 import LarrowIcon from '../assets/Arrow_Left_Square-512.png'; // Replace with actual path to your uploaded image
 import { Link } from 'react-router-dom';
 import Spinner from './Spinner';  // Import the Spinner component
+import charizard from '../assets/images/charizard.gif'
+import Footer from './Footer';
+
 
 const pokemonCategories = {
   starter: {
@@ -206,11 +209,12 @@ const FeaturedPokemon = () => {
   }
 
   return (
+    <>
     <div className="relative bg-gray-800 py-8 px-12">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-3xl font-bold text-white">{pokemonCategories[selectedCategory].title}</h2>
         <select
-          className="bg-white text-gray-800 px-4 py-2 rounded"
+          className="bg-[#ebf1ff] text-gray-800 px-4 py-2 rounded"
           value={selectedCategory}
           onChange={handleCategoryChange}
         >
@@ -281,6 +285,22 @@ const FeaturedPokemon = () => {
         </button>
       </div>
     </div>
+    <div className="flex justify-center py-1.5">
+  <div className="flex flex-row items-center">
+    <Link to ="/Pokemon">
+    <button className="relative flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-red-500 to-rose-300 group-hover:from-red-500 group-hover:to-rose-300 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-600 hover:shadow-lg">
+      <span className="relative px-5 py-2.5 transition-all text-rose-600 hover:text-rose-100 ease-in duration-75 bg-white dark:bg-white rounded-md group-hover:bg-opacity-0">
+        Explore More Pokemon
+      </span>
+    </button>
+    </Link>
+    <div className="w-32 h-32">  
+      <img src={charizard} alt="Pokemon Charizard GIF" className="w-full h-full object-contain"/>
+    </div>
+  </div>
+</div>
+<Footer/>
+  </>
   );
 };
 

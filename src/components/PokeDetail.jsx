@@ -8,6 +8,9 @@ import emerald from '../assets/green.png';
 import gold from '../assets/gold.png';
 import './Text.css';
 import { Evolution } from './Evolution';
+import Navbar from './Navbar';
+import Footer from './Footer';
+import Spinner from './Spinner';
 
 const imageArray = [
   { name: 'red', src: red, alt: 'Red version' },
@@ -57,17 +60,18 @@ const PokeDetail = () => {
     fetchPokemonData(id);
   }, [id]);
 
-  if (loading) {
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-blue-500"></div>
-      </div>
-    );
-  }
+  
 
   return (
-    <div className="container mx-auto px-4 py-8 bg-slate-50 pt-24">
-      <h1 className="text-4xl md:text-6xl font-bold text-center mb-8">
+    <>
+
+    {loading ? (
+          <Spinner/>
+        ) : (
+        <>
+    <Navbar/>
+    <div className="container mx-auto px-4 py-8 bg-slate-50 pt-24 ">
+      <h1 className="text-4xl md:text-6xl font-bold text-rose-600 text-center mb-8 pt-10 pb-6">
         <i>{pokemonData?.name.charAt(0).toUpperCase() + pokemonData?.name.slice(1)}</i>
       </h1>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -78,18 +82,18 @@ const PokeDetail = () => {
               <img src={pokemonImage} alt={pokemonData?.name} className="w-64 h-64 md:w-80 md:h-80 object-contain" />
             </div>
             <div className="mt-6 flex flex-col items-center">
-              <h2 className="text-xl font-bold mb-2">Type and Region:</h2>
+              <h2 className="text-xl text-rose-400 font-bold mb-2">Type and Region:</h2>
               <div className="flex flex-wrap justify-center gap-2">
                 <div className="flex items-center">
-                  <span className="font-semibold mr-1">Type:</span>
+                  <span className="font-semibold mr-1 text-rose-800">Type:</span>
                   {pokemonTypes.map((type) => (
-                    <span key={type} className={`px-3 py-1 rounded-lg shadow text-sm ${typeColors[type.toLowerCase()]}`}>
+                    <span key={type} className={`px-3 py-1 ml-2 rounded-lg shadow text-sm ${typeColors[type.toLowerCase()]}`}>
                       {type.charAt(0).toUpperCase() + type.slice(1)}
                     </span>
                   ))}
                 </div>
                 <div className="flex items-center">
-                  <span className="font-semibold mr-1">Region:</span>
+                  <span className="font-semibold mr-1 text-rose-800">Region:</span>
                   <span className={`px-3 py-1 rounded-lg shadow text-sm ${regionColors[region.toLowerCase()]}`}>
                     {region.charAt(0).toUpperCase() + region.slice(1)}
                   </span>
@@ -102,15 +106,15 @@ const PokeDetail = () => {
 
         {/* Right Column */}
         <div className="space-y-1">
-          <div className="bg-white rounded-lg p-6 shadow-lg">
-            <p className="text-lg mb-4">{versionDescription}</p>
+          <div className="bg-white rounded-lg p-6 ">
+            <p className="text-lg mb-4 text-rose-800">{versionDescription}</p>
             <div className="flex flex-wrap items-center gap-4">
-              <span className="font-semibold">Version:</span>
+              <span className="font-semibold text-rose-400">Version:</span>
               <div className="flex flex-wrap gap-2">
                 {imageArray.map((image) => (
                   <button
                     key={image.name}
-                    className={`p-1 rounded-full ${selectedVersion === image.name ? 'ring-2 ring-blue-500' : ''}`}
+                    className={`p-1 rounded-full ${selectedVersion === image.name ? 'ring-2 ring-rose-700' : ''}`}
                     onClick={() => handleVersionClick(image.name)}
                   >
                     <img className="h-8 w-8 md:h-10 md:w-10" src={image.src} alt={image.alt} />
@@ -120,17 +124,17 @@ const PokeDetail = () => {
             </div>
           </div>
 
-          <div className="bg-white rounded-lg p-6 shadow-lg">
-            <h2 className="text-2xl font-bold mb-4">Details</h2>
+          <div className="bg-white rounded-lg p-6 ">
+            <h2 className="text-2xl text-rose-400 font-bold mb-4">Details</h2>
             <Card pokemonId={id} />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="bg-white rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow">
-              <h2 className="text-2xl font-bold mb-4">Weaknesses</h2>
+              <h2 className="text-2xl text-rose-400 font-bold mb-4">Weaknesses</h2>
               <div className="space-y-4">
                 <div>
-                  <h3 className="font-semibold mb-2">Double Damage From:</h3>
+                  <h3 className="font-semibold mb-2 text-rose-800">Double Damage From:</h3>
                   <div className="flex flex-wrap gap-2">
                     {doubleDamageFrom.length > 0 ? (
                       doubleDamageFrom.map((type) => (
@@ -139,12 +143,12 @@ const PokeDetail = () => {
                         </span>
                       ))
                     ) : (
-                      <p className="text-gray-500">No notable weaknesses.</p>
+                      <p className=" text-rose-300">No notable weaknesses.</p>
                     )}
                   </div>
                 </div>
                 <div>
-                  <h3 className="font-semibold mb-2">Half Damage From:</h3>
+                  <h3 className="font-semibold mb-2 text-rose-800">Half Damage From:</h3>
                   <div className="flex flex-wrap gap-2">
                     {halfDamageFrom.length > 0 ? (
                       halfDamageFrom.map((type) => (
@@ -153,16 +157,16 @@ const PokeDetail = () => {
                         </span>
                       ))
                     ) : (
-                      <p className="text-gray-500">No notable resistances.</p>
+                      <p className="text-rose-300">No notable resistances.</p>
                     )}
                   </div>
                 </div>
               </div>
             </div>
             <div className="bg-white rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow">
-              <h2 className="text-2xl font-bold mb-4">Strengths</h2>
+              <h2 className="text-2xl text-rose-400 font-bold mb-4">Strengths</h2>
               <div>
-                <h3 className="font-semibold mb-2">Double Damage To:</h3>
+                <h3 className="font-semibold mb-2 text-rose-800">Double Damage To:</h3>
                 <div className="flex flex-wrap gap-2">
                   {doubleDamageTo.length > 0 ? (
                     doubleDamageTo.map((type) => (
@@ -180,6 +184,11 @@ const PokeDetail = () => {
         </div>
       </div>
     </div>
+    </>
+  )}
+
+    <Footer/>
+    </>
   );
 };
 
