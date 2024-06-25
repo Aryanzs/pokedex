@@ -8,6 +8,103 @@
   position: relative;
   overflow: hidden;
 }
+/* Home.css */
+
+
+#darkrai-container {
+  position: fixed;
+  bottom: 20px; /* Adjust as needed for bottom positioning */
+  right: 20px; /* Adjust as needed for right positioning */
+  z-index: 1000; /* Ensure it's above other content */
+}
+
+.darkrai-wrapper {
+  position: relative;
+  cursor: pointer; /* Change cursor on hover */
+}
+
+.darkrai-gif {
+  width: 200px; /* Adjust size as needed */
+  height: auto;
+  transition: opacity 0.9s ease; /* Smooth transition for opacity */
+}
+
+.darkrai-hover-text {
+  position: absolute;
+  top: -30px; /* Adjust positioning of text box */
+  right: calc(100% + 10px); /* Position to the left of Darkrai GIF */
+  background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  opacity: 0; /* Initially hidden */
+  transition: opacity 0.3s ease; /* Smooth transition for opacity */
+  pointer-events: none; /* Prevent text box from blocking hover on Darkrai GIF */
+}
+
+.darkrai-wrapper:hover .darkrai-gif {
+  opacity: 0.5; /* Reduce opacity on hover */
+}
+
+.darkrai-wrapper:hover .darkrai-hover-text {
+  opacity: 1; /* Show text box on hover */
+}
+
+/* Home.css */
+
+#mew-container {
+  position: fixed;
+  bottom: 20px; /* Adjust as needed for bottom positioning */
+  left: 20px; /* Adjust as needed for left positioning */
+  z-index: 1000; /* Ensure it's above other content */
+}
+
+.mew-wrapper {
+  position: relative;
+  cursor: pointer; /* Change cursor on hover */
+}
+
+.mew-gif {
+  width: 150px; /* Adjust size as needed */
+  height: auto;
+  /* Remove opacity transition */
+}
+
+.mew-hover-text {
+  position: absolute;
+  top: -30px; /* Adjust positioning of text box */
+  left: calc(100% + 10px); /* Position to the right of Mew GIF */
+  background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  opacity: 0; /* Initially hidden */
+  transition: opacity 0.3s ease; /* Smooth transition for opacity */
+  pointer-events: none; /* Prevent text box from blocking hover on Mew GIF */
+}
+
+.mew-wrapper:hover .mew-hover-text {
+  opacity: 1; /* Show text box on hover */
+}
+#pikachu-marquee {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+#pikachu-marquee marquee {
+  width: 100%;
+  overflow: hidden;
+}
+
+#pikachu-marquee img {
+  width: 150px; /* Adjust size as needed */
+  height: auto;
+}
+
 
 #textblock-content-container {
   display: flex;
@@ -49,8 +146,8 @@
 }
 
 #textblock-content {
-  color: #02238d;
-  font-size: 20px;
+  color: #080808;
+  font-size: 29px;
   margin-top: 20px;
   max-width: 500px;
 }

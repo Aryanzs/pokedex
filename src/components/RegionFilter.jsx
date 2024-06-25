@@ -11,6 +11,7 @@ const RegionFilter = () => {
   const [selectedRegion, setSelectedRegion] = useState('kanto'); // Default selected region
   const [currentPage, setCurrentPage] = useState(1); // State for current page
   const [loading, setLoading] = useState(true); // State for loading status
+  const [flippedCards, setFlippedCards] = useState({});
   const pokemonPerPage = 20; // Number of Pokémon cards per page
 
   // Regions and corresponding generation IDs
@@ -43,7 +44,7 @@ const RegionFilter = () => {
 
               // Return only if both name and image URL are available
               if (id && name && imageUrl) {
-                return { id, name, imageUrl };
+                return { id, name, imageUrl, types: pokemonInfo.data.types, stats: pokemonInfo.data.stats, moves: pokemonInfo.data.moves };
               } else {
                 return null; // Handle cases where data is incomplete
               }
@@ -86,51 +87,108 @@ const RegionFilter = () => {
   const indexOfFirstPokemon = indexOfLastPokemon - pokemonPerPage;
   const currentPokemonList = pokemonList.slice(indexOfFirstPokemon, indexOfLastPokemon);
 
+  const handleFlip = (index) => {
+    setFlippedCards(prevState => ({
+      ...prevState,
+      [index]: !prevState[index]
+    }));
+  };
+
+  // Function to handle page change
+  const handlePageChange = (page) => {
+    setLoading(true);
+    setCurrentPage(page);
+    setTimeout(() => setLoading(false), 500); // Simulating loading time
+  };
+
   return (
     <>
       <Navbar />
-      {loading ? (
-        <Spinner /> // Show spinner while loading
-      ) : (
-        <div className="region-filter">
-          <Link to="/pokemon"> <button className="ml-5 px-4 py-2 mt-24  bg-red-500 hover:bg-rose-700 text-white rounded-md">Goback</button></Link>
+      <div className="region-filter min-h-screen bg-gray-100 mt-24 p-8">
+        <Link to="/pokemon">
+          <button className="ml-5 px-4 py-2 mt-5 bg-red-500 hover:bg-rose-700 text-white rounded-md">
+            Go back
+          </button>
+        </Link>
 
-          <div className="region-buttons flex mt-10 justify-center">
+        <div className="region-buttons flex mt-10 justify-center">
+          {regions.map((region) => (
+            <button
+              key={region.id}
+              className="ml-2 px-4 py-2 bg-red-500 hover:bg-rose-700 text-white rounded-md"
+              onClick={() => handleRegionChange(region.id)}
+            >
+              {region.name}
+            </button>
+          ))}
+        </div>
 
-            {regions.map((region) => (
-              <button
-                key={region.id}
-                className="ml-2 px-4 py-2 bg-red-500 hover:bg-rose-700 text-white rounded-md"
-                onClick={() => handleRegionChange(region.id)}
-              >
-                {region.name}
-              </button>
-            ))}
-          </div>
-
+        {loading ? (
+          <Spinner /> // Show spinner while loading
+        ) : (
           <div className="pokemon-list mt-4">
-            <h3 className="font-extrabold flex justify-center text-red-800 text-xl mb-2">{selectedRegion.toUpperCase()}</h3>
-            <div className="grid grid-cols-5 gap-4">
+            <h3 className="font-extrabold flex justify-center text-red-800 text-xl mb-2">
+              {selectedRegion.toUpperCase()}
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mt-8 gap-4">
               {currentPokemonList.length > 0 ? (
                 currentPokemonList.map((pokemon, index) => (
-                  <Link to={`/pokemon/${pokemon.id}`} key={index}>
-                    <div className="bg-gray-200 rounded-lg shadow-md p-4 flex flex-col items-center">
-                      <img src={pokemon.imageUrl} alt={pokemon.name} className="h-32 w-32 mb-2" />
-                      <p className="text-xl font-bold mb-2 capitalize text-red-500">{pokemon.name} (# {pokemon.id})</p>
-                    </div>
-                  </Link>
+                  <div
+                    key={index}
+                    className="bg-gray-200 rounded-lg p-4 shadow-xl relative transition-colors duration-300 hover:bg-gradient-to-b hover:from-red-400 hover:via-red-300 hover:to-zinc-200"
+                  >
+                    <button
+                      className="absolute top-2 right-2 text-red-800 rounded-full p-1"
+                      onClick={() => handleFlip(index)}
+                    >
+                      <i className="fas fa-info-circle"></i>
+                    </button>
+                    {flippedCards[index] ? (
+                      <div>
+                        <div className="flex items-center">
+                          <p className="text-xl font-bold capitalize text-slate-800">{pokemon.name}</p>
+                          <img
+                            src={pokemon.imageUrl}
+                            alt={`${pokemon.name} sprite`}
+                            className="w-10 h-10 ml-2"
+                          />
+                        </div>
+                        <p className="text-sm text-black">Type: {pokemon.types.map(type => type.type.name).join(', ')}</p>
+                        <p className="text-sm text-black">Moves: {pokemon.moves.map(move => move.move.name).slice(0, 5).join(', ')}</p>
+                        <p className="text-sm text-black">HP: {pokemon.stats.find(stat => stat.stat.name === 'hp').base_stat}</p>
+                        <p className="text-sm text-black">Attack: {pokemon.stats.find(stat => stat.stat.name === 'attack').base_stat}</p>
+                        <p className="text-sm text-black">Defense: {pokemon.stats.find(stat => stat.stat.name === 'defense').base_stat}</p>
+                      </div>
+                    ) : (
+                      <div>
+                        <Link to={`/pokemon/${pokemon.id}`} className="no-underline">
+                          {pokemon.imageUrl ? (
+                            <img
+                              src={pokemon.imageUrl}
+                              alt={pokemon.name}
+                              className="w-full h-32 object-contain mb-2 transition-all duration-300 ease-in-out hover:h-48 hover:scale-105"
+                            />
+                          ) : (
+                            <div className="h-48 flex items-center justify-center bg-gray-200 mb-2">
+                              <p>No official artwork available</p>
+                            </div>
+                          )}
+                          <p className="text-xl font-bold capitalize text-rose-600">{pokemon.name}</p>
+                          <p className="text-sm text-rose-400">#{pokemon.id}</p>
+                        </Link>
+                      </div>
+                    )}
+                  </div>
                 ))
               ) : (
                 <p className="text-center">No Pokémon found for this region.</p>
               )}
             </div>
-            <Next currentPage={currentPage} setCurrentPage={setCurrentPage} />
+            <Next currentPage={currentPage} setCurrentPage={handlePageChange} />
           </div>
-          <Footer/>
-
-        </div>
-      )}
-      
+        )}
+        <Footer />
+      </div>
     </>
   );
 };

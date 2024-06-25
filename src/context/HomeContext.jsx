@@ -7,13 +7,9 @@ export const usePokemon = () => useContext(HomeContext);
 
 export const HomeProvider = ({ children }) => {
   const [pokemonData, setPokemonData] = useState([]);
-  const [filteredPokemonData, setFilteredPokemonData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [flippedCards, setFlippedCards] = useState({});
-  const [filter, setFilter] = useState('none');
-
-  const itemsPerPage = 20;
 
   const handleFlip = (index) => {
     setFlippedCards(prevState => ({
@@ -39,13 +35,13 @@ export const HomeProvider = ({ children }) => {
     }
   };
 
-  const fetchAllPokemon = async () => {
+  const fetchData = async () => {
     setLoading(true);
     try {
-      const allPokemonResponse = await axios.get(`https://pokeapi.co/api/v2/pokemon?limit=10000`);
-      const allPokemonUrls = allPokemonResponse.data.results.map(pokemon => pokemon.url);
-      const allPokemonDetails = await Promise.all(
-        allPokemonUrls.map(async url => {
+      const result = await axios.get(`https://pokeapi.co/api/v2/pokemon?limit=20&offset=${(currentPage - 1) * 20}`);
+      const pokemonUrls = result.data.results.map(pokemon => pokemon.url);
+      const pokemonDetails = await Promise.all(
+        pokemonUrls.map(async url => {
           try {
             const response = await axios.get(url);
             const pokemonData = response.data;
@@ -59,53 +55,28 @@ export const HomeProvider = ({ children }) => {
             };
           } catch (error) {
             console.error('Error fetching Pokemon details:', error);
-            return null;
+            return null; // Return null for failed requests
           }
         })
       );
-      const validPokemonDetails = allPokemonDetails.filter(pokemon => pokemon !== null);
-      setPokemonData(validPokemonDetails);
-      applyFilterAndPaginate(validPokemonDetails, filter, currentPage);
+      // Filter out null values from failed requests
+      const filteredPokemonDetails = pokemonDetails.filter(pokemon => pokemon !== null);
+      setPokemonData(filteredPokemonDetails);
     } catch (error) {
-      console.error('Error fetching all Pokemon:', error);
+      console.error('Error fetching Pokemon list:', error);
     } finally {
       setLoading(false);
     }
   };
 
-  const applyFilterAndPaginate = (data, filter, page) => {
-    const sortedData = applyFilter(data, filter);
-    const paginatedData = sortedData.slice((page - 1) * itemsPerPage, page * itemsPerPage);
-    setFilteredPokemonData(paginatedData);
-  };
-
-  const applyFilter = (data, filter) => {
-    switch (filter) {
-      case 'lowest':
-        return data.slice().sort((a, b) => a.id - b.id);
-      case 'greatest':
-        return data.slice().sort((a, b) => b.id - a.id);
-      case 'a-z':
-        return data.slice().sort((a, b) => a.name.localeCompare(b.name));
-      case 'z-a':
-        return data.slice().sort((a, b) => b.name.localeCompare(a.name));
-      default:
-        return data;
-    }
-  };
-
   useEffect(() => {
-    fetchAllPokemon();
-  }, []);
-
-  useEffect(() => {
-    applyFilterAndPaginate(pokemonData, filter, currentPage);
-  }, [filter, currentPage, pokemonData]);
+    fetchData();
+  }, [currentPage]);
 
   return (
     <HomeContext.Provider
       value={{
-        pokemonData: filteredPokemonData,
+        pokemonData,
         currentPage,
         loading,
         flippedCards,
@@ -113,7 +84,6 @@ export const HomeProvider = ({ children }) => {
         setLoading,
         setCurrentPage,
         handleFlip,
-        setFilter,
       }}
     >
       {children}
