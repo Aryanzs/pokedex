@@ -102,89 +102,90 @@ const PokeType = () => {
   return (
     <>
       <Navbar />
-      <div className="p-4 py-32">
-      <Link to="/Pokemon"> 
-          <button className=" px-4 py-2 text-red-600 hover:bg-rose-300 hover:text-zinc-50 border-2 rounded-md">Go back</button>
+      <div className="min-h-screen bg-gray-100 dark:bg-gray-900 mt-20">
+        <Link to="/Pokemon"> 
+          <button className="px-4 py-2 mt-4 text-red-600 dark:text-red-500 hover:bg-rose-300 hover:text-zinc-50 border-2 rounded-md">Go back</button>
         </Link>
-        <div className="mb-4 mx-auto w-full max-w-[1000px] px-4">
-  <div className="flex flex-wrap justify-center">
-    {types.map(type => (
-      <button
-        key={type.name}
-        className={`m-2 px-4 py-2 ${typeColors[type.name]} hover:bg-rose-700 text-white rounded-md`}
-        onClick={() => handleTypeSelect(type.name)}
-      >
-        {type.name}
-      </button>
-    ))}
-  </div>
-</div>
-
-        {loading ? (
-          <Spinner />
-        ) : (
-          <>
-            {pokemon.length === 0 ? (
-              <div className="text-center text-xl text-rose-500 font-bold mt-8">No Pokémon found for the selected type.</div>
-            ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mt-8 gap-4">
-                {pokemon.map((poke, index) => (
-                  <div
-                    key={index}
-                    className="bg-gray-200 rounded-lg p-4 shadow-xl relative transition-colors duration-300 hover:bg-gradient-to-b hover:from-red-400 hover:via-red-300 hover:to-zinc-200"
-                  >
-                    <button
-                      className="absolute top-2 right-2 text-red-800 rounded-full p-1"
-                      onClick={() => handleFlip(index)}
+        <div className="p-8">
+          <div className="mb-4 mx-auto w-full max-w-[1000px] px-4">
+            <div className="flex flex-wrap justify-center">
+              {types.map(type => (
+                <button
+                  key={type.name}
+                  className={`m-2 px-4 py-2 ${typeColors[type.name]} hover:bg-rose-700 text-white rounded-md`}
+                  onClick={() => handleTypeSelect(type.name)}
+                >
+                  {type.name}
+                </button>
+              ))}
+            </div>
+          </div>
+          {loading ? (
+            <Spinner />
+          ) : (
+            <>
+              {pokemon.length === 0 ? (
+                <div className="text-center text-xl text-rose-500 dark:text-red-500 font-bold mt-8">No Pokémon found for the selected type.</div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mt-8 gap-4">
+                  {pokemon.map((poke, index) => (
+                    <div
+                      key={index}
+                      className="bg-gray-200 dark:bg-gray-700 rounded-lg p-4 shadow-xl relative transition-colors duration-300 hover:bg-gradient-to-b hover:from-red-400 hover:via-red-300 hover:to-zinc-200 dark:hover:from-red-300 dark:hover:via-red-200 dark:hover:to-zinc-200"
                     >
-                      <i className="fas fa-info-circle"></i>
-                    </button>
-                    {flippedCards[index] ? (
-                      <div>
-                        <div className="flex items-center">
-                          <p className="text-xl font-bold capitalize text-slate-800">{poke.name}</p>
-                          <img
-                            src={poke.sprites.other['official-artwork'].front_default}
-                            alt={`${poke.name} sprite`}
-                            className="w-10 h-10 ml-2"
-                          />
-                        </div>
-                        <p className="text-sm text-black">Type: {poke.types.map(type => type.type.name).join(', ')}</p>
-                        <p className="text-sm text-black">Moves: {poke.moves.map(move => move.move.name).slice(0, 5).join(', ')}</p>
-                        <p className="text-sm text-black">HP: {poke.stats.find(stat => stat.stat.name === 'hp').base_stat}</p>
-                        <p className="text-sm text-black">Attack: {poke.stats.find(stat => stat.stat.name === 'attack').base_stat}</p>
-                        <p className="text-sm text-black">Defense: {poke.stats.find(stat => stat.stat.name === 'defense').base_stat}</p>
-                      </div>
-                    ) : (
-                      <div>
-                        <Link to={`/pokemon/${poke.id}`} className="no-underline">
-                          {poke.sprites.other['official-artwork'].front_default ? (
+                      <button
+                        className="absolute top-2 right-2 text-red-800 dark:text-red-500 rounded-full p-1"
+                        onClick={() => handleFlip(index)}
+                      >
+                        <i className="fas fa-info-circle"></i>
+                      </button>
+                      {flippedCards[index] ? (
+                        <div>
+                          <div className="flex items-center">
+                            <p className="text-xl font-bold capitalize text-slate-800 dark:text-red-500">{poke.name}</p>
                             <img
                               src={poke.sprites.other['official-artwork'].front_default}
-                              alt={poke.name}
-                              className="w-full h-32 object-contain mb-2 transition-all duration-300 ease-in-out hover:h-48 hover:scale-105"
+                              alt={`${poke.name} sprite`}
+                              className="w-10 h-10 ml-2"
                             />
-                          ) : (
-                            <div className="h-48 flex items-center justify-center bg-gray-200 mb-2">
-                              <p>No official artwork available</p>
-                            </div>
-                          )}
-                          <p className="text-xl font-bold capitalize text-rose-600">{poke.name}</p>
-                          <p className="text-sm text-rose-400">#{poke.id}</p>
-                        </Link>
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-            )}
-            <Next 
-              currentPage={currentPage} 
-              setCurrentPage={setCurrentPage} 
-              totalPages={totalPages} 
-            />
-          </>
-        )}
+                          </div>
+                          <p className="text-sm text-black dark:text-red-500">Type: {poke.types.map(type => type.type.name).join(', ')}</p>
+                          <p className="text-sm text-black dark:text-red-500">Moves: {poke.moves.map(move => move.move.name).slice(0, 5).join(', ')}</p>
+                          <p className="text-sm text-black dark:text-red-500">HP: {poke.stats.find(stat => stat.stat.name === 'hp').base_stat}</p>
+                          <p className="text-sm text-black dark:text-red-500">Attack: {poke.stats.find(stat => stat.stat.name === 'attack').base_stat}</p>
+                          <p className="text-sm text-black dark:text-red-500">Defense: {poke.stats.find(stat => stat.stat.name === 'defense').base_stat}</p>
+                        </div>
+                      ) : (
+                        <div>
+                          <Link to={`/pokemon/${poke.id}`} className="no-underline">
+                            {poke.sprites.other['official-artwork'].front_default ? (
+                              <img
+                                src={poke.sprites.other['official-artwork'].front_default}
+                                alt={poke.name}
+                                className="w-full h-32 object-contain mb-2 transition-all duration-300 ease-in-out hover:h-48 hover:scale-105"
+                              />
+                            ) : (
+                              <div className="h-48 flex items-center justify-center bg-gray-200 dark:bg-gray-700 mb-2">
+                                <p>No official artwork available</p>
+                              </div>
+                            )}
+                            <p className="text-xl font-bold capitalize text-rose-600 dark:text-red-500">{poke.name}</p>
+                            <p className="text-sm text-rose-400 dark:text-red-500">#{poke.id}</p>
+                          </Link>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
+              <Next 
+                currentPage={currentPage} 
+                setCurrentPage={setCurrentPage} 
+                totalPages={totalPages} 
+              />
+            </>
+          )}
+        </div>
       </div>
       <Footer />
     </>

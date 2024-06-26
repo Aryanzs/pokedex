@@ -1,3 +1,16 @@
+
+
+.container {
+  width: 100%;
+  max-width: none;
+  padding: 0;
+}
+
+/* You may need to add padding to the inner content */
+.inner-content {
+  padding: 0 1rem;
+}
+
 .card {
   width: 100%;
   max-width: 430px;
