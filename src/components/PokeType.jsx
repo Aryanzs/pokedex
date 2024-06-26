@@ -103,20 +103,23 @@ const PokeType = () => {
     <>
       <Navbar />
       <div className="p-4 py-32">
-        <Link to="/pokemon"> 
-          <button className="ml-5 px-4 py-2 mt-5 bg-red-500 hover:bg-rose-700 text-white rounded-md">Go back</button>
+      <Link to="/Pokemon"> 
+          <button className=" px-4 py-2 text-red-600 hover:bg-rose-300 hover:text-zinc-50 border-2 rounded-md">Go back</button>
         </Link>
-        <div className="mb-4 ml-60 w-[1000px]">
-          {types.map(type => (
-            <button
-              key={type.name}
-              className={`ml-5 px-4 py-2 mt-5 ${typeColors[type.name]} hover:bg-rose-700 text-white rounded-md`}
-              onClick={() => handleTypeSelect(type.name)}
-            >
-              {type.name}
-            </button>
-          ))}
-        </div>
+        <div className="mb-4 mx-auto w-full max-w-[1000px] px-4">
+  <div className="flex flex-wrap justify-center">
+    {types.map(type => (
+      <button
+        key={type.name}
+        className={`m-2 px-4 py-2 ${typeColors[type.name]} hover:bg-rose-700 text-white rounded-md`}
+        onClick={() => handleTypeSelect(type.name)}
+      >
+        {type.name}
+      </button>
+    ))}
+  </div>
+</div>
+
         {loading ? (
           <Spinner />
         ) : (

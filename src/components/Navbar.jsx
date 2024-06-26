@@ -16,7 +16,7 @@ const Navbar = () => {
             />
           </a>
           <div className="text-2xl font-bold text-red-500">
-            <a href='/Pokemon' className="hover:text-black">Pokedex</a>
+            <a href='/' className="hover:text-black">Pokedex</a>
           </div>
         </div>
 

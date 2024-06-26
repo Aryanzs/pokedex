@@ -105,23 +105,22 @@ const RegionFilter = () => {
     <>
       <Navbar />
       <div className="region-filter min-h-screen bg-gray-100 mt-24 p-8">
-        <Link to="/pokemon">
-          <button className="ml-5 px-4 py-2 mt-5 bg-red-500 hover:bg-rose-700 text-white rounded-md">
-            Go back
-          </button>
+      <Link to="/Pokemon"> 
+          <button className=" px-4 py-2 text-red-600 hover:bg-rose-300 hover:text-zinc-50 border-2 rounded-md">Go back</button>
         </Link>
 
-        <div className="region-buttons flex mt-10 justify-center">
-          {regions.map((region) => (
-            <button
-              key={region.id}
-              className="ml-2 px-4 py-2 bg-red-500 hover:bg-rose-700 text-white rounded-md"
-              onClick={() => handleRegionChange(region.id)}
-            >
-              {region.name}
-            </button>
-          ))}
-        </div>
+        <div className="region-buttons flex flex-wrap mt-10 justify-center">
+  {regions.map((region) => (
+    <button
+      key={region.id}
+      className="m-2 px-4 py-2 bg-red-500 hover:bg-rose-700 text-white rounded-md"
+      onClick={() => handleRegionChange(region.id)}
+    >
+      {region.name}
+    </button>
+  ))}
+</div>
+
 
         {loading ? (
           <Spinner /> // Show spinner while loading
@@ -187,8 +186,9 @@ const RegionFilter = () => {
             <Next currentPage={currentPage} setCurrentPage={handlePageChange} />
           </div>
         )}
-        <Footer />
       </div>
+      <Footer />
+
     </>
   );
 };

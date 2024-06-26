@@ -1,6 +1,13 @@
+/* Ensure the body takes at least the full viewport height */
+body {
+  min-height: 100vh;
+  margin: 0;
+}
+
+/* Container for the entire text block */
 #textblock {
   background-color: #fafafa;
-  height: 100vh;
+  min-height: 100vh; /* Ensure it takes full viewport height */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -8,9 +15,26 @@
   position: relative;
   overflow: hidden;
 }
-/* Home.css */
 
+/* Charizard Marquee */
+#charizard-marquee {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
 
+#charizard-marquee marquee {
+  width: 100%;
+  overflow: hidden;
+}
+
+#charizard-marquee img {
+  width: 300px; /* Adjust size as needed */
+  height: 300px;
+}
+
+/* Darkrai Container */
 #darkrai-container {
   position: fixed;
   bottom: 20px; /* Adjust as needed for bottom positioning */
@@ -51,8 +75,7 @@
   opacity: 1; /* Show text box on hover */
 }
 
-/* Home.css */
-
+/* Mew Container */
 #mew-container {
   position: fixed;
   bottom: 20px; /* Adjust as needed for bottom positioning */
@@ -68,7 +91,6 @@
 .mew-gif {
   width: 150px; /* Adjust size as needed */
   height: auto;
-  /* Remove opacity transition */
 }
 
 .mew-hover-text {
@@ -88,6 +110,8 @@
 .mew-wrapper:hover .mew-hover-text {
   opacity: 1; /* Show text box on hover */
 }
+
+/* Pikachu Marquee */
 #pikachu-marquee {
   position: fixed;
   bottom: 0;
@@ -105,7 +129,7 @@
   height: auto;
 }
 
-
+/* Text Block Content Container */
 #textblock-content-container {
   display: flex;
   flex-direction: column;
@@ -118,6 +142,7 @@
   text-align: center;
 }
 
+/* Text Block Image Container */
 #textblock-image-container {
   position: absolute;
   top: 50%;
@@ -128,10 +153,11 @@
 }
 
 #textblock-gif {
-  width: 1500px; /* Increase the size as needed */
+  width: 1500px;
   height: auto;
 }
 
+/* Text Block Text Container */
 #textblock-text-container {
   position: relative;
   z-index: 1;
@@ -154,93 +180,85 @@
 
 @media (max-width: 768px) {
   #textblock-image-container {
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 
   #textblock-gif {
-      width: 100%;
-      height: 600px;
+    width: 100%;
+    height: 600px;
   }
 
   #textblock-title {
-      font-size: 28px;
+    font-size: 28px;
   }
 
   #textblock-content {
-      font-size: 18px;
+    font-size: 18px;
   }
 }
 
-  
-  .animation, .animation_layer {
-    height: 1000px;
-  }
-  
-  .animation {
-    display: block;
-    position: relative;
-    z-index: 10;
-  }
-  
-  .animation_layer {
-    background-position: bottom center;
-    background-size: auto 1038px;
-    background-repeat: repeat-x;
-    width: 100%;
-    position: absolute;
-  }
-  
-  .animation_layer.parallax {
-    position: fixed;
-  }
-  
-  .parallax-container {
-    margin-top: 70px; /* Adjust this value based on the height of your navbar */
-  }
-  
-  #artback {
-    background-image: url('../assets/images/background.jpg');
-  }
-  
-  #mountain {
-    background-image: url('../assets/images/skyup.png');
+/* Parallax Animation */
+.animation, .animation_layer {
+  height: 1000px;
+}
 
-  }
-  
-  #logoland {
-    background-image: url('../assets/images/Group 1.png');
+.animation {
+  display: block;
+  position: relative;
+  z-index: 10;
+}
 
-  }
-  
-  #jungle1 {
-    background-image: url('../assets/images/rainbow.png');
+.animation_layer {
+  background-position: bottom center;
+  background-size: auto 1038px;
+  background-repeat: repeat-x;
+  width: 100%;
+  position: absolute;
+}
 
-  }
-  
-  #jungle2 {
-    background-image: url('../assets/images/cloud.png');
+.animation_layer.parallax {
+  position: fixed;
+}
 
-  }
-  
-  #jungle3 {
-    background-image: url('../assets/images/rightgrass.png');
+.parallax-container {
+  margin-top: 70px;
+}
 
-  }
-  
-  #jungle4 {
-    background-image: url('../assets/images/leftgrass.png');
+/* Background Images */
+#artback {
+  background-image: url('../assets/images/background.jpg');
+}
 
-  }
-  
-  #manonmountain {
-    background-image: url('../assets/images/manonmountain.png');
+#mountain {
+  background-image: url('../assets/images/skyup.png');
+}
 
-  }
-  
-  #jungle5 {
-    background-image: url('../assets/images/ash.png');
+#logoland {
+  background-image: url('../assets/images/Group 1.png');
+}
 
-  }
-  
+#jungle1 {
+  background-image: url('../assets/images/rainbow.png');
+}
+
+#jungle2 {
+  background-image: url('../assets/images/cloud.png');
+}
+
+#jungle3 {
+  background-image: url('../assets/images/rightgrass.png');
+}
+
+#jungle4 {
+  background-image: url('../assets/images/leftgrass.png');
+}
+
+#manonmountain {
+  background-image: url('../assets/images/manonmountain.png');
+}
+
+#jungle5 {
+  background-image: url('../assets/images/ash.png');
+}

@@ -3,7 +3,7 @@ import gengar from '../assets/images/wamp.gif';
 import charizard from '../assets/charizardfly.gif';
 import darkrai from '../assets/darkrai.gif';
 import mew from '../assets/mew.gif';
-import pikachu from '../assets/pikarunning.gif'; // Import the Pikachu GIF
+import pikachu from '../assets/pikarunning.gif';
 
 function TextBlock() {
     return (
@@ -51,18 +51,17 @@ function TextBlock() {
                         className="mew-gif"
                     />
                     <div className="mew-hover-text">
-                        mew!
+                        Mew!
                     </div>
                 </div>
             </div>
             <div id="pikachu-marquee">
                 <marquee direction="right">
-                    <img src={pikachu} alt="Running Pikachu" className="pokemon-gif w-4 h-4" />
+                    <img src={pikachu} alt="Running Pikachu" className="pokemon-gif" />
                 </marquee>
             </div>
-
         </>
     );
 }
 
-export default TextBlock;
+export default TextBlock
