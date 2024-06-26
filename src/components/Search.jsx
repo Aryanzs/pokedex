@@ -103,7 +103,7 @@ const Search = () => {
   };
 
   return (
-    <form onSubmit={handleSearch} className="flex justify-center search-form">
+    <form onSubmit={handleSearch} className="flex justify-center  search-form">
       <Autosuggest
         suggestions={suggestions}
         onSuggestionsFetchRequested={onSuggestionsFetchRequested}
