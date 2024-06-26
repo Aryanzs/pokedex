@@ -1,6 +1,5 @@
 import './Home.css';
 import gengar from '../assets/images/wamp.gif';
-import charizard from '../assets/charizardfly.gif';
 import darkrai from '../assets/darkrai.gif';
 import mew from '../assets/mew.gif';
 import pikachu from '../assets/pikarunning.gif'; // Import the Pikachu GIF
@@ -8,11 +7,7 @@ import pikachu from '../assets/pikarunning.gif'; // Import the Pikachu GIF
 function TextBlock() {
     return (
         <>
-            <div id="charizard-marquee">
-                <marquee direction="left">
-                    <img src={charizard} alt="Flying Charizard" className="pokemon-gif" />
-                </marquee>
-            </div>
+
 
             <div id="textblock">
                 <div id="textblock-content-container">

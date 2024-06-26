@@ -73,8 +73,9 @@ const PokeDetail = () => {
         <>
     <Navbar/>
     <div className="container mx-auto px-4 py-8 bg-slate-50 pt-24 ">
-     <Link to="/pokemon"> <button className="ml-5 px-4 py-2 mt-5 bg-red-500 hover:bg-rose-700 text-white rounded-md">Goback</button></Link>
-      <h1 className="text-4xl md:text-6xl font-bold text-rose-600 text-center mb-8 pt-10 pb-6">
+    <Link to="/Pokemon"> 
+          <button className=" px-4 py-2 text-red-600 hover:bg-rose-300 hover:text-zinc-50 border-2 rounded-md">Go back</button>
+        </Link>      <h1 className="text-4xl md:text-6xl font-bold text-rose-600 text-center mb-8 pt-10 pb-6">
         <i>{pokemonData?.name.charAt(0).toUpperCase() + pokemonData?.name.slice(1)}</i>
       </h1>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">

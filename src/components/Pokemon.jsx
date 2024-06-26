@@ -27,8 +27,14 @@ const Pokemon = () => {
           <Spinner />
         ) : (
         <>
+
         <Navbar/>
+        <div className="flex">
+                <Link to="/"> 
+          <div className=" px-4 py-2 text-red-600 hover:bg-rose-300 hover:text-zinc-50 border-2 rounded-md">Go back</div>
+        </Link>
         <Search/>
+        </div>
           <div className="grid grid-cols-1 md:grid-cols-2 mt-10 lg:grid-cols-4 gap-4">
             {pokemonData.map((pokemon, index) => (
               <div key={index} className="bg-gray-200 rounded-lg p-4 shadow-xl relative transition-colors duration-300 hover:bg-gradient-to-b hover:from-red-400 hover:via-red-300 hover:to-zinc-200">
