@@ -69,6 +69,8 @@
     .search-form {
         flex-wrap: wrap;
     }
+    .search-button{
+margin-left: -10px;    }
 }
   /* Search button styles */
   .search-button {
