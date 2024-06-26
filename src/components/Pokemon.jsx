@@ -26,9 +26,9 @@ const Pokemon = () => {
             <Spinner />
           ) : (
             <>
-              <div className="flex flex-wrap">
+              <div className="flex flex-wrap gap-5">
                 <Link to="/">
-                  <div className="px-4 py-2 text-red-600 hover:bg-rose-300 hover:text-zinc-50 border-2 rounded-md">
+                  <div className="px-4 py-2  text-red-600 hover:bg-rose-300 hover:text-zinc-50 border-2 rounded-md">
                     Go back
                   </div>
                 </Link>

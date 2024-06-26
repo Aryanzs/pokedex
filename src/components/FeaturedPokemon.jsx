@@ -209,97 +209,97 @@ const FeaturedPokemon = () => {
 
   return (
     <>
-    <div className="relative bg-gray-800 py-8 px-12 " >
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-3xl font-bold text-white">{pokemonCategories[selectedCategory].title}</h2>
-        <select
-          className="bg-[#ebf1ff] text-gray-800 px-4 py-2 rounded"
-          value={selectedCategory}
-          onChange={handleCategoryChange}
-        >
-          {Object.keys(pokemonCategories).map((category) => (
-            <option key={category} value={category}>
-              {pokemonCategories[category].title}
-            </option>
-          ))}
-        </select>
-      </div>
-      <div className="relative group">
-        <button
-          className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white text-white p-2 rounded-full shadow-lg z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-          onClick={handlePrevClick}
-        >
-          <img src={LarrowIcon} alt="Previous" className="w-9 h-9" />
-        </button>
-        <div className="overflow-hidden">
-          <div
-            className="flex transition-transform duration-500"
-            style={{ transform: `translateX(-${currentIndex * (100 / 3)}%)` }}
+      <div className="relative bg-gray-800 py-8 px-4 md:px-12">
+        <div className="flex flex-col md:flex-row justify-between items-center mb-4">
+          <h2 className="text-3xl font-bold text-white">{pokemonCategories[selectedCategory].title}</h2>
+          <select
+            className="bg-[#ebf1ff] text-gray-800 px-4 py-2 rounded mt-2 md:mt-0"
+            value={selectedCategory}
+            onChange={handleCategoryChange}
           >
-            {featuredPokemon.map((pokemon, index) => (
-              <Link
-                key={index}
-                to={`/pokemon/${pokemon.id}`}
-                className="min-w-[33.33%] flex-shrink-0 flex items-center justify-center bg-gray-700 text-white rounded-lg p-4 shadow-xl m-2 no-underline"
-              >
-                <div className="w-full">
-                  {pokemon.officialArtworkUrl ? (
-                    <img
-                      src={pokemon.officialArtworkUrl}
-                      alt={pokemon.name}
-                      className="w-full h-64 object-contain mb-2"
-                    />
-                  ) : (
-                    <div className="h-64 flex items-center justify-center bg-gray-600 mb-2">
-                      <p>No official artwork available</p>
-                    </div>
-                  )}
-                  <div className="text-center">
-                    <p className="text-xl font-bold capitalize">{pokemon.name}</p>
-                    <p className="text-sm">Type:</p>
-                    <div className="flex justify-center flex-wrap">
-                      {pokemon.types.map((type, i) => (
-                        <span
-                          key={i}
-                          className={`px-4 py-1 m-1 rounded ${typeColors[type.type.name]}`}
-                        >
-                          {type.type.name}
-                        </span>
-                      ))}
-                    </div>
-                    <p className="text-sm mt-2">
-                      Abilities: {pokemon.abilities.map((ability) => ability.ability.name).join(', ')}
-                    </p>
-                  </div>
-                </div>
-              </Link>
+            {Object.keys(pokemonCategories).map((category) => (
+              <option key={category} value={category}>
+                {pokemonCategories[category].title}
+              </option>
             ))}
+          </select>
+        </div>
+        <div className="relative group">
+          <button
+            className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white text-white p-2 rounded-full shadow-lg z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            onClick={handlePrevClick}
+          >
+            <img src={LarrowIcon} alt="Previous" className="w-9 h-9" />
+          </button>
+          <div className="overflow-hidden">
+            <div
+              className="flex transition-transform duration-500"
+              style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+            >
+              {featuredPokemon.map((pokemon, index) => (
+                <Link
+                  key={index}
+                  to={`/pokemon/${pokemon.id}`}
+                  className="w-full md:w-1/3 flex-shrink-0 flex items-center justify-center bg-gray-700 text-white rounded-lg p-4 shadow-xl m-2 no-underline"
+                >
+                  <div className="w-full">
+                    {pokemon.officialArtworkUrl ? (
+                      <img
+                        src={pokemon.officialArtworkUrl}
+                        alt={pokemon.name}
+                        className="w-full h-64 object-contain mb-2"
+                      />
+                    ) : (
+                      <div className="h-64 flex items-center justify-center bg-gray-600 mb-2">
+                        <p>No official artwork available</p>
+                      </div>
+                    )}
+                    <div className="text-center">
+                      <p className="text-xl font-bold capitalize">{pokemon.name}</p>
+                      <p className="text-sm">Type:</p>
+                      <div className="flex justify-center flex-wrap">
+                        {pokemon.types.map((type, i) => (
+                          <span
+                            key={i}
+                            className={`px-4 py-1 m-1 rounded ${typeColors[type.type.name]}`}
+                          >
+                            {type.type.name}
+                          </span>
+                        ))}
+                      </div>
+                      <p className="text-sm mt-2">
+                        Abilities: {pokemon.abilities.map((ability) => ability.ability.name).join(', ')}
+                      </p>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+          <button
+            className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white text-white p-2 rounded-full shadow-lg z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            onClick={handleNextClick}
+          >
+            <img src={RarrowIcon} alt="Next" className="w-9 h-9" />
+          </button>
+        </div>
+      </div>
+      <div className="flex justify-center py-1.5">
+        <div className="flex flex-col md:flex-row items-center">
+          <Link to="/Pokemon">
+            <button className="relative flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-red-500 to-rose-300 group-hover:from-red-500 group-hover:to-rose-300 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-600 hover:shadow-lg">
+              <span className="relative px-5 py-2.5 transition-all text-rose-600 hover:text-rose-100 ease-in duration-75 bg-white dark:bg-white rounded-md group-hover:bg-opacity-0">
+                Explore More Pokemon
+              </span>
+            </button>
+          </Link>
+          <div className="w-32 h-32 mt-4 md:mt-0 md:ml-4">  
+            <img src={charizard} alt="Pokemon Charizard GIF" className="w-full h-full object-contain"/>
           </div>
         </div>
-        <button
-          className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white text-white p-2 rounded-full shadow-lg z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-          onClick={handleNextClick}
-        >
-          <img src={RarrowIcon} alt="Next" className="w-9 h-9" />
-        </button>
       </div>
-    </div>
-    <div className="flex justify-center py-1.5 ">
-  <div className="flex flex-row items-center">
-    <Link to ="/Pokemon" >
-    <button className="relative flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-red-500 to-rose-300 group-hover:from-red-500 group-hover:to-rose-300 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-600 hover:shadow-lg">
-      <span className="relative px-5 py-2.5 transition-all text-rose-600 hover:text-rose-100 ease-in duration-75 bg-white dark:bg-white rounded-md group-hover:bg-opacity-0">
-        Explore More Pokemon
-      </span>
-    </button>
-    </Link>
-    <div className="w-32 h-32">  
-      <img src={charizard} alt="Pokemon Charizard GIF" className="w-full h-full object-contain"/>
-    </div>
-  </div>
-</div>
-<Footer/>
-  </>
+      <Footer/>
+    </>
   );
 };
 
