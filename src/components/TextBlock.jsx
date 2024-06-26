@@ -4,6 +4,7 @@ import charizard from '../assets/charizardfly.gif';
 import darkrai from '../assets/darkrai.gif';
 import mew from '../assets/mew.gif';
 import pikachu from '../assets/pikarunning.gif';
+import grass from '../assets/grass.gif'
 
 function TextBlock() {
     return (
@@ -59,7 +60,24 @@ function TextBlock() {
                 <marquee direction="right">
                     <img src={pikachu} alt="Running Pikachu" className="pokemon-gif" />
                 </marquee>
+  
             </div>
+            <div className='flex h-48' >
+                    <img src={grass} alt="grass" />  
+                    <img src={grass} alt="grass" />  
+                    <img src={grass} alt="grass" />  
+                    <img src={grass} alt="grass" />  
+                    <img src={grass} alt="grass" />  
+                    <img src={grass} alt="grass" />  
+                    <img src={grass} alt="grass" />  
+                    <img src={grass} alt="grass" />  
+                    <img src={grass} alt="grass" />  
+                    <img src={grass} alt="Fgrass" />  
+                    <img src={grass} alt="grass" />  
+
+
+                </div>
+  
         </>
     );
 }

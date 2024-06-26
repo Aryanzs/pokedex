@@ -122,11 +122,13 @@ body {
 #pikachu-marquee marquee {
   width: 100%;
   overflow: hidden;
+  margin-bottom: -155px;
 }
 
 #pikachu-marquee img {
   width: 150px; /* Adjust size as needed */
   height: auto;
+
 }
 
 /* Text Block Content Container */
