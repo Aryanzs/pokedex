@@ -19,7 +19,7 @@ const Pokemon = () => {
 
   return (
     <>
-      <div className="min-h-screen bg-gray-100 dark:bg-gray-900 mt-20">
+      <div className="min-h-screen bg-gray-100 dark:bg-gray-900 ">
         <Navbar />
         <div className="p-8">
           {loading ? (
@@ -28,7 +28,7 @@ const Pokemon = () => {
             <>
               <div className="flex flex-wrap gap-5">
                 <Link to="/">
-                  <div className="px-4 py-2  text-red-600 hover:bg-rose-300 hover:text-zinc-50 border-2 rounded-md">
+                  <div className="px-4 py-2  mt-20 text-red-600 hover:bg-rose-300 hover:text-zinc-50 border-2 rounded-md">
                     Go back
                   </div>
                 </Link>

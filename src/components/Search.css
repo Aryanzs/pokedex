@@ -63,12 +63,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 80px;
     
   }
   @media (max-width: 260px) {
     .search-form {
         flex-wrap: wrap;
-    }
+        margin-top: -10px;   
+       }
+
     .search-button{
 margin-left: -10px;    }
 }
@@ -89,3 +92,9 @@ margin-left: -10px;    }
     background-color: #0056b3;
   }
   
+  @media (max-width: 545px) {
+    .search-form {
+      margin-top: -10px;   
+     }
+
+  }

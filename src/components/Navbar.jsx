@@ -12,7 +12,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 bg-red-500 dark:bg-gray-900 right-0 backdrop-filter backdrop-blur-lg bg-opacity-20 shadow-md py-4 z-50">
+    <nav className="fixed top-0 left-0 bg-red-500 dark:bg-gray-700 right-0 dark:backdrop-filter backdrop-filter dark:backdrop-blur-lg backdrop-blur-lg dark:bg-opacity-20 bg-opacity-20  shadow-md dark:shadow-md py-4 z-50">
       <div className="container mx-auto px-4 flex justify-between items-center">
         <div className="flex items-center space-x-2">
           <a href='/'>

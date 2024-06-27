@@ -2,10 +2,10 @@ import React, { useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { PokemonContext } from '../context/PokemonContext';
 import Card from './Card';
-import red from '../assets/red.png';
-import blue from '../assets/blue.png';
-import emerald from '../assets/green.png';
-import gold from '../assets/gold.png';
+import red from '../assets/red-removebg.png';
+import blue from '../assets/blue-removebg.png';
+import emerald from '../assets/green-removebg.png';
+import gold from '../assets/gold-removebg.png';
 import { Evolution } from './Evolution';
 import Navbar from './Navbar';
 import Footer from './Footer';
@@ -69,11 +69,12 @@ const PokeDetail = () => {
           <Navbar />
           <div className="w-full min-h-screen  bg-slate-50 dark:bg-gray-900 pt-24">
             <Link to="/Pokemon">
-              <button className="px-4 py-2 text-red-600 dark:text-red-400 hover:bg-rose-300 dark:hover:bg-rose-900 hover:text-zinc-50 border-2 rounded-md">
+              <button className="px-4 py-2 text-red-600 dark:text-white hover:bg-rose-300 dark:hover:bg-rose-900 hover:text-zinc-50 border-2 rounded-md">
                 Go back
               </button>
             </Link>
-            <h1 className="text-4xl md:text-6xl font-bold text-rose-600 dark:text-rose-400 text-center mb-8 pt-10 pb-6">
+
+            <h1 className="text-4xl md:text-6xl font-bold text-rose-600 dark:text-rose-500 text-center mb-8 pt-8 pb-6">
               <i>{pokemonData?.name.charAt(0).toUpperCase() + pokemonData?.name.slice(1)}</i>
             </h1>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -108,7 +109,7 @@ const PokeDetail = () => {
 
               {/* Right Column */}
               <div className="space-y-1">
-                <div className="bg-white dark:bg-gray-800 rounded-lg p-6">
+                <div className="bg-white dark:bg-gray-900 rounded-lg p-6">
                   <p className="text-lg mb-4 text-rose-800 dark:text-rose-300">{versionDescription}</p>
                   <div className="flex flex-wrap items-center gap-4">
                     <span className="font-semibold text-rose-400 dark:text-rose-500">Version:</span>
@@ -126,13 +127,13 @@ const PokeDetail = () => {
                   </div>
                 </div>
 
-                <div className="bg-white dark:bg-gray-800 rounded-lg p-6">
+                <div className="bg-white dark:bg-gray-900 rounded-lg p-6">
                   <h2 className="text-2xl text-rose-400 dark:text-rose-500 font-bold mb-4">Details</h2>
                   <Card pokemonId={id} />
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow">
+                  <div className="bg-white dark:bg-gray-800 rounded-lg p-6 dark:shadow-lg dark:hover:shadow-xl shadow-lg hover:shadow-xl dark:transition-shadow transition-shadow">
                     <h2 className="text-2xl text-rose-400 dark:text-rose-500 font-bold mb-4">Weaknesses</h2>
                     <div className="space-y-4">
                       <div>
