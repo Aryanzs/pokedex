@@ -23,7 +23,7 @@ const Navbar = () => {
             />
           </a>
           <div className="text-2xl font-bold text-red-500">
-            <a href='/Pokemon' className="hover:text-black dark:hover:text-red-500">Pokedex</a>
+            <a href='/pokemon' className="hover:text-black dark:hover:text-red-500">Pokedex</a>
           </div>
         </div>
 
