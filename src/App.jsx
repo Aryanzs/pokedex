@@ -25,7 +25,7 @@ const App = () => {
           </>
         } />
         <Route path="/pokemon/:id" element={<PokeDetail />} />
-        <Route path="/pokemon" element={<Pokemon/>} />
+        <Route path="/Pokemon" element={<Pokemon/>} />
         <Route path="/region" element={<RegionFilter/>} />
         <Route path="/type" element={<PokeType/>} />
 
