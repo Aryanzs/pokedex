@@ -180,16 +180,22 @@ body {
   max-width: 500px;
 }
 
-@media (max-width: 768px) {
-  #textblock-image-container {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+@media (max-width: 1024px) {
+  #darkrai-container .darkrai-gif,
+  #mew-container .mew-gif,
+  #pikachu-marquee img {
+    width: 180px; /* Adjust size as needed for smaller screens */
+    height: auto;
+  }
+  #charizard-marquee img{
+    width:300px;
+    height: 300px;
   }
 
+
   #textblock-gif {
-    width: 100%;
-    height: 600px;
+    width: 1000px;
+    height: auto;
   }
 
   #textblock-title {
@@ -197,7 +203,82 @@ body {
   }
 
   #textblock-content {
-    font-size: 18px;
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  #textblock {
+    padding: 10px;
+  }
+
+  #textblock-gif {
+    width: 600px;
+    height: auto;
+  }
+
+  #textblock-title {
+    font-size: 24px;
+  }
+
+  #textblock-content {
+    font-size: 20px;
+  }
+
+  #darkrai-container .darkrai-gif,
+  #mew-container .mew-gif,
+  #pikachu-marquee img {
+    width: 150px; /* Adjust size as needed for smaller screens */
+    height: auto;
+  }
+  #charizard-marquee img{
+    width:200px;
+    height: 200px;
+  }
+
+}
+
+@media (max-width: 480px) {
+  #textblock-gif {
+    width: 300px;
+    height: auto;
+  }
+
+  #textblock-title {
+    font-size: 20px;
+  }
+
+  #textblock-content {
+    font-size: 16px;
+  }
+
+
+  #darkrai-container .darkrai-gif,
+  #mew-container .mew-gif,
+  #pikachu-marquee img {
+    width: 100px; /* Adjust size as needed for smaller screens */
+    height: auto;
+  }
+  #charizard-marquee img{
+    width:200px;
+    height: 200px;
+  }
+
+  #darkrai-container {
+    bottom: 10px; /* Adjust as needed for smaller screens */
+    right: 10px; /* Adjust as needed for smaller screens */
+  }
+
+  #mew-container {
+    bottom: 10px; /* Adjust as needed for smaller screens */
+    left: 10px; /* Adjust as needed for smaller screens */
+  }
+
+  .darkrai-hover-text,
+  .mew-hover-text {
+    font-size: 12px; /* Adjust font size for smaller screens */
+    top: -20px; /* Adjust positioning of text box */
+    padding: 5px; /* Adjust padding for smaller screens */
   }
 }
 
