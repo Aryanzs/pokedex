@@ -23,8 +23,7 @@ const Navbar = () => {
             />
           </Link>
           <div className="text-2xl font-bold text-red-500">
-            <Link to='/pokemon' className="hover:text-black dark:hover:text-red-500">Pokedex</Link>
-          </div>
+          <a href='/pokemon' className="hover:text-black dark:hover:text-red-500">Pokedex</a>          </div>
         </div>
 
         <div className="hidden md:flex space-x-4 text-lg font-bold text-red-500 gap-3">
