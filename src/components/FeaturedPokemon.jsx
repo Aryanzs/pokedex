@@ -5,7 +5,6 @@ import LarrowIcon from '../assets/Arrow_Left_Square-512.png'; // Replace with ac
 import { Link } from 'react-router-dom';
 import Spinner from './Spinner';  // Import the Spinner component
 import charizard from '../assets/images/charizard.gif'
-import Footer from './Footer';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import './FeaturedPokemon.css';
 
@@ -313,7 +312,6 @@ const FeaturedPokemon = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 };

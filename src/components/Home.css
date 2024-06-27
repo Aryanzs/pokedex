@@ -309,6 +309,16 @@ body {
   margin-top: 70px;
 }
 
+@media (max-width: 415px) {
+  .animation, .animation_layer {
+    height: 1200px;
+    top: 0;
+    margin-top: -80px; /* Adjust as needed */
+    padding-top: 0;
+  }
+}
+
+
 /* Background Images */
 #artback {
   background-image: url('../assets/images/background.jpg');
@@ -319,7 +329,7 @@ body {
 }
 
 #logoland {
-  background-image: url('../assets/images/Group 1.png');
+  background-image: url('../assets/images/Frame 1.png');
 }
 
 #jungle1 {
