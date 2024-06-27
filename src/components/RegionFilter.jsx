@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Navbar from './Navbar';
-import { Link } from 'react-router-dom';
-import Next from './Next';
-import Spinner from './Spinner';
+import Next from './Next2';
 import Footer from './Footer';
+import { Link } from 'react-router-dom';
+import Spinner from './Spinner';
+import './RegionFilter.css'; // Import the CSS file for animations
 
 const RegionFilter = () => {
   const [pokemonList, setPokemonList] = useState([]);
@@ -12,7 +13,8 @@ const RegionFilter = () => {
   const [currentPage, setCurrentPage] = useState(1); // State for current page
   const [loading, setLoading] = useState(true); // State for loading status
   const [flippedCards, setFlippedCards] = useState({});
-  const pokemonPerPage = 20; // Number of Pokémon cards per page
+  const [totalPages, setTotalPages] = useState(1);
+  const itemsPerPage = 20; // Number of Pokémon cards per page
 
   // Regions and corresponding generation IDs
   const regions = [
@@ -59,13 +61,16 @@ const RegionFilter = () => {
         const filteredPokemonDetails = pokemonDetails.filter(pokemon => pokemon !== null);
 
         setPokemonList(filteredPokemonDetails);
+        setTotalPages(Math.ceil(filteredPokemonDetails.length / itemsPerPage));
         setCurrentPage(1); // Reset to the first page when region changes
       } else {
         setPokemonList([]);
+        setTotalPages(1);
       }
     } catch (error) {
       console.error('Error fetching Pokémon list:', error);
       setPokemonList([]); // Clear Pokémon list on error
+      setTotalPages(1);
     } finally {
       setLoading(false); // Set loading to false after data fetch completes
     }
@@ -83,8 +88,8 @@ const RegionFilter = () => {
   };
 
   // Calculate indices for the current page
-  const indexOfLastPokemon = currentPage * pokemonPerPage;
-  const indexOfFirstPokemon = indexOfLastPokemon - pokemonPerPage;
+  const indexOfLastPokemon = currentPage * itemsPerPage;
+  const indexOfFirstPokemon = indexOfLastPokemon - itemsPerPage;
   const currentPokemonList = pokemonList.slice(indexOfFirstPokemon, indexOfLastPokemon);
 
   const handleFlip = (index) => {
@@ -104,9 +109,9 @@ const RegionFilter = () => {
   return (
     <>
       <Navbar />
-      <div className="region-filter min-h-screen bg-gray-100 dark:bg-gray-900  p-8">
+      <div className="region-filter min-h-screen bg-gray-100 dark:bg-gray-900 p-8">
         <Link to="/Pokemon"> 
-          <button className=" px-4 py-2 mt-20 text-red-600 dark:text-red-400 hover:bg-rose-300 hover:text-zinc-50 dark:hover:text-zinc-50 border-2 rounded-md">Go back</button>
+          <button className="px-4 py-2 mt-20 text-red-600 dark:text-red-400 hover:bg-rose-300 hover:text-zinc-50 dark:hover:text-zinc-50 border-2 rounded-md">Go back</button>
         </Link>
 
         <div className="region-buttons flex flex-wrap mt-10 justify-center">
@@ -133,7 +138,7 @@ const RegionFilter = () => {
                 currentPokemonList.map((pokemon, index) => (
                   <div
                     key={index}
-                    className="bg-gray-200 dark:bg-gray-800 rounded-lg p-4 shadow-xl relative transition-colors duration-300 hover:bg-gradient-to-b hover:from-red-400 hover:via-red-300 hover:to-zinc-200 dark:hover:bg-gradient-to-b dark:hover:from-red-300 dark:hover:via-red-200 dark:hover:to-zinc-200"
+                    className="bg-gray-200 dark:bg-gray-800 rounded-lg p-4 shadow-xl relative transition-colors duration-300 hover:bg-gradient-to-b hover:from-red-400 hover:via-red-300 hover:to-zinc-200 dark:hover:bg-gradient-to-b dark:hover:from-red-300 dark:hover:via-red-200 dark:hover:to-zinc-200 animate-fadeIn"
                   >
                     <button
                       className="absolute top-2 right-2 text-red-800 dark:text-red-400 rounded-full p-1"
@@ -151,11 +156,11 @@ const RegionFilter = () => {
                             className="w-10 h-10 ml-2"
                           />
                         </div>
-                        <p className="text-sm text-black  dark:text-red-500">Type: {pokemon.types.map(type => type.type.name).join(', ')}</p>
-                        <p className="text-sm text-black  dark:text-red-500">Moves: {pokemon.moves.map(move => move.move.name).slice(0, 5).join(', ')}</p>
-                        <p className="text-sm text-black  dark:text-red-500">HP: {pokemon.stats.find(stat => stat.stat.name === 'hp').base_stat}</p>
-                        <p className="text-sm text-black  dark:text-red-500">Attack: {pokemon.stats.find(stat => stat.stat.name === 'attack').base_stat}</p>
-                        <p className="text-sm text-black  dark:text-red-500">Defense: {pokemon.stats.find(stat => stat.stat.name === 'defense').base_stat}</p>
+                        <p className="text-sm text-black dark:text-red-500">Type: {pokemon.types.map(type => type.type.name).join(', ')}</p>
+                        <p className="text-sm text-black dark:text-red-500">Moves: {pokemon.moves.map(move => move.move.name).slice(0, 5).join(', ')}</p>
+                        <p className="text-sm text-black dark:text-red-500">HP: {pokemon.stats.find(stat => stat.stat.name === 'hp').base_stat}</p>
+                        <p className="text-sm text-black dark:text-red-500">Attack: {pokemon.stats.find(stat => stat.stat.name === 'attack').base_stat}</p>
+                        <p className="text-sm text-black dark:text-red-500">Defense: {pokemon.stats.find(stat => stat.stat.name === 'defense').base_stat}</p>
                       </div>
                     ) : (
                       <div>
@@ -164,25 +169,29 @@ const RegionFilter = () => {
                             <img
                               src={pokemon.imageUrl}
                               alt={pokemon.name}
-                              className="w-full h-32 object-contain mb-2 transition-all duration-300 ease-in-out hover:h-48 hover:scale-105"
+                              className="w-full h-32 object-contain mb-2 transition-all duration-300 ease-in-out hover:h-48 hover:scale-105 animate-moveIn"
                             />
                           ) : (
                             <div className="h-48 flex items-center justify-center bg-gray-200 dark:bg-gray-700 mb-2">
                               <p>No official artwork available</p>
                             </div>
                           )}
-                          <p className="text-xl font-bold capitalize text-rose-600 dark:text-rose-400">{pokemon.name}</p>
-                          <p className="text-sm text-rose-400 dark:text-rose-300">#{pokemon.id}</p>
+                          <p className="text-xl font-bold capitalize text-rose-600 dark:text-red-500">{pokemon.name}</p>
+                          <p className="text-sm text-rose-400 dark:text-red-500">#{pokemon.id}</p>
                         </Link>
                       </div>
                     )}
                   </div>
                 ))
               ) : (
-                <p className="text-center dark:text-gray-300">No Pokémon found for this region.</p>
+                <div className="text-center text-xl text-rose-500 dark:text-red-500 font-bold mt-8">No Pokémon found for the selected region.</div>
               )}
             </div>
-            <Next currentPage={currentPage} setCurrentPage={handlePageChange} />
+            <Next
+              currentPage={currentPage}
+              setCurrentPage={handlePageChange}
+              totalPages={totalPages}
+            />
           </div>
         )}
       </div>

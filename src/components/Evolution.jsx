@@ -4,7 +4,6 @@ import React, { useEffect, useState, useRef } from "react";
 import { motion, useMotionValue, animate } from "framer-motion";
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-
 const typeColors = {
   grass: 'bg-green-500 text-white',
   fire: 'bg-red-500 text-white',

@@ -1,0 +1,44 @@
+/* RegionFilter.css */
+@keyframes moveIn {
+    from {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  .animate-moveIn {
+    animation: moveIn 0.9s ease-out;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  .animate-fadeIn {
+    animation: fadeIn 0.9s ease-out;
+  }
+  
+  .animate-stagger {
+    animation: moveIn 0.9s ease-out;
+    opacity: 1;
+  }
+  
+  .animate-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .animate-item {
+    opacity: 0;
+    animation-fill-mode: forwards;
+  }
+  

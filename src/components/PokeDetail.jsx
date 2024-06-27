@@ -11,6 +11,8 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import Spinner from './Spinner';
 import { Link } from 'react-router-dom';
+import '../components/Text.css'
+
 
 const imageArray = [
   { name: 'red', src: red, alt: 'Red version' },
@@ -81,7 +83,7 @@ const PokeDetail = () => {
               {/* Left Column */}
               <div className="space-y-8">
                 <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg">
-                  <div className="flex justify-center">
+                  <div className="image-container flex justify-center">
                     <img src={pokemonImage} alt={pokemonData?.name} className="w-64 h-64 md:w-80 md:h-80 object-contain" />
                   </div>
                   <div className="mt-6 flex flex-col items-center">

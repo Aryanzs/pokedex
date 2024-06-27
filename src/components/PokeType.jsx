@@ -5,6 +5,7 @@ import Next from './Next2';
 import Footer from './Footer';
 import { Link } from 'react-router-dom';
 import Spinner from './Spinner';
+import './PokeType.css'; // Import the CSS file for animations
 
 const typeColors = {
   normal: 'bg-gray-400',
@@ -102,7 +103,7 @@ const PokeType = () => {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen bg-gray-100 dark:bg-gray-900 ">
+      <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
         <Link to="/Pokemon"> 
           <button className="px-4 py-2 mt-24 text-red-600 dark:text-red-500 hover:bg-rose-300 hover:text-zinc-50 border-2 rounded-md">Go back</button>
         </Link>
@@ -131,7 +132,7 @@ const PokeType = () => {
                   {pokemon.map((poke, index) => (
                     <div
                       key={index}
-                      className="bg-gray-200 dark:bg-gray-700 rounded-lg p-4 shadow-xl relative transition-colors duration-300 hover:bg-gradient-to-b hover:from-red-400 hover:via-red-300 hover:to-zinc-200 dark:hover:from-red-300 dark:hover:via-red-200 dark:hover:to-zinc-200"
+                      className="bg-gray-200 dark:bg-gray-700 rounded-lg p-4 shadow-xl relative transition-colors duration-300 hover:bg-gradient-to-b hover:from-red-400 hover:via-red-300 hover:to-zinc-200 dark:hover:from-red-300 dark:hover:via-red-200 dark:hover:to-zinc-200 animate-fadeIn"
                     >
                       <button
                         className="absolute top-2 right-2 text-red-800 dark:text-red-500 rounded-full p-1"
@@ -162,7 +163,7 @@ const PokeType = () => {
                               <img
                                 src={poke.sprites.other['official-artwork'].front_default}
                                 alt={poke.name}
-                                className="w-full h-32 object-contain mb-2 transition-all duration-300 ease-in-out hover:h-48 hover:scale-105"
+                                className="w-full h-32 object-contain mb-2 transition-all duration-300 ease-in-out hover:h-48 hover:scale-105 animate-moveIn"
                               />
                             ) : (
                               <div className="h-48 flex items-center justify-center bg-gray-200 dark:bg-gray-700 mb-2">
