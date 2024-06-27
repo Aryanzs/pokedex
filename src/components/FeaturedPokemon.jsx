@@ -162,10 +162,10 @@ const FeaturedPokemon = () => {
   const [featuredPokemon, setFeaturedPokemon] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState('starter');
-  const [isLoading, setIsLoading] = useState(true);  // New state for loading
+  const [isLoading, setIsLoading] = useState(true);
 
   const fetchPokemonDetails = async (urls) => {
-    setIsLoading(true);  // Set loading to true when fetching starts
+    setIsLoading(true);
     try {
       const pokemonDetails = await Promise.all(
         urls.map(async (url) => {
@@ -182,7 +182,7 @@ const FeaturedPokemon = () => {
     } catch (error) {
       console.error("Error fetching Pokemon details:", error);
     } finally {
-      setIsLoading(false);  // Set loading to false when fetching is done
+      setIsLoading(false);
     }
   };
 
@@ -191,11 +191,11 @@ const FeaturedPokemon = () => {
   }, [selectedCategory]);
 
   const handlePrevClick = () => {
-    setCurrentIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : featuredPokemon.length - 1));
+    setCurrentIndex((prevIndex) => (prevIndex === 0 ? featuredPokemon.length - 3 : prevIndex - 3));
   };
 
   const handleNextClick = () => {
-    setCurrentIndex((prevIndex) => (prevIndex < featuredPokemon.length - 1 ? prevIndex + 1 : 0));
+    setCurrentIndex((prevIndex) => (prevIndex >= featuredPokemon.length - 3 ? 0 : prevIndex + 3));
   };
 
   const handleCategoryChange = (event) => {
@@ -204,8 +204,14 @@ const FeaturedPokemon = () => {
   };
 
   if (isLoading) {
-    return <Spinner/>;  // Show the Spinner while loading
+    return <Spinner />;
   }
+
+  const displayedPokemon = [
+    featuredPokemon[currentIndex],
+    featuredPokemon[(currentIndex + 1) % featuredPokemon.length],
+    featuredPokemon[(currentIndex + 2) % featuredPokemon.length],
+  ];
 
   return (
     <>
@@ -231,50 +237,45 @@ const FeaturedPokemon = () => {
           >
             <img src={LarrowIcon} alt="Previous" className="w-9 h-9" />
           </button>
-          <div className="overflow-hidden">
-            <div
-              className="flex transition-transform duration-500"
-              style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-            >
-              {featuredPokemon.map((pokemon, index) => (
-                <Link
-                  key={index}
-                  to={`/pokemon/${pokemon.id}`}
-                  className="w-full md:w-1/3 flex-shrink-0 flex items-center justify-center bg-gray-700 text-white rounded-lg p-4 shadow-xl m-2 no-underline"
-                >
-                  <div className="w-full">
-                    {pokemon.officialArtworkUrl ? (
-                      <img
-                        src={pokemon.officialArtworkUrl}
-                        alt={pokemon.name}
-                        className="w-full h-64 object-contain mb-2"
-                      />
-                    ) : (
-                      <div className="h-64 flex items-center justify-center bg-gray-600 mb-2">
-                        <p>No official artwork available</p>
-                      </div>
-                    )}
-                    <div className="text-center">
-                      <p className="text-xl font-bold capitalize">{pokemon.name}</p>
-                      <p className="text-sm">Type:</p>
-                      <div className="flex justify-center flex-wrap">
-                        {pokemon.types.map((type, i) => (
-                          <span
-                            key={i}
-                            className={`px-4 py-1 m-1 rounded ${typeColors[type.type.name]}`}
-                          >
-                            {type.type.name}
-                          </span>
-                        ))}
-                      </div>
-                      <p className="text-sm mt-2">
-                        Abilities: {pokemon.abilities.map((ability) => ability.ability.name).join(', ')}
-                      </p>
+          <div className="flex items-center justify-center space-x-4">
+            {displayedPokemon.map((pokemon) => (
+              <Link
+                key={pokemon.id}
+                to={`/pokemon/${pokemon.id}`}
+                className="w-full md:w-1/3 flex-shrink-0 flex items-center justify-center bg-gray-700 text-white rounded-lg p-4 shadow-xl m-2 no-underline"
+              >
+                <div className="w-full">
+                  {pokemon.officialArtworkUrl ? (
+                    <img
+                      src={pokemon.officialArtworkUrl}
+                      alt={pokemon.name}
+                      className="w-full h-64 object-contain mb-2"
+                    />
+                  ) : (
+                    <div className="h-64 flex items-center justify-center bg-gray-600 mb-2">
+                      <p>No official artwork available</p>
                     </div>
+                  )}
+                  <div className="text-center">
+                    <p className="text-xl font-bold capitalize">{pokemon.name}</p>
+                    <p className="text-sm">Type:</p>
+                    <div className="flex justify-center flex-wrap">
+                      {pokemon.types.map((type, i) => (
+                        <span
+                          key={i}
+                          className={`px-4 py-1 m-1 rounded ${typeColors[type.type.name]}`}
+                        >
+                          {type.type.name}
+                        </span>
+                      ))}
+                    </div>
+                    <p className="text-sm mt-2">
+                      Abilities: {pokemon.abilities.map((ability) => ability.ability.name).join(', ')}
+                    </p>
                   </div>
-                </Link>
-              ))}
-            </div>
+                </div>
+              </Link>
+            ))}
           </div>
           <button
             className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white text-white p-2 rounded-full shadow-lg z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
@@ -293,12 +294,12 @@ const FeaturedPokemon = () => {
               </span>
             </button>
           </Link>
-          <div className="w-32 h-32 mt-4 md:mt-0 md:ml-4">  
+          <div className="w-32 h-32 mt-4 md:mt-0 md:ml-4">
             <img src={charizard} alt="Pokemon Charizard GIF" className="w-full h-full object-contain"/>
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 };
