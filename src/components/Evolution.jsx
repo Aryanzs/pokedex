@@ -91,7 +91,7 @@ export const Evolution = ({ pokemonId }) => {
       }
     });
 
-    return <Stars ref={starsRef} radius={50} count={120} factor={4} fade speed={2} />;
+    return <Stars ref={starsRef} radius={50} count={200} factor={4} fade speed={2} />;
   };
 
   return (

@@ -15,16 +15,15 @@ const Navbar = () => {
     <nav className="fixed top-0 left-0 bg-red-500 dark:bg-gray-700 right-0 dark:backdrop-filter backdrop-filter dark:backdrop-blur-lg backdrop-blur-lg dark:bg-opacity-20 bg-opacity-20  shadow-md dark:shadow-md py-4 z-50">
       <div className="container mx-auto px-4 flex justify-between items-center">
         <div className="flex items-center space-x-2">
-          <a href='/'>
+          <Link to='/'>
             <img
               src={logo}
               alt="Logo"
               className="h-14 w-14 rounded-full shadow-lg hover:animate-move-left-right"
             />
-          </a>
+          </Link>
           <div className="text-2xl font-bold text-red-500">
-            <a href='/pokemon' className="hover:text-black dark:hover:text-red-500">Pokedex</a>
-          </div>
+          <a href='/pokemon' className="hover:text-black dark:hover:text-red-500">Pokedex</a>          </div>
         </div>
 
         <div className="hidden md:flex space-x-4 text-lg font-bold text-red-500 gap-3">

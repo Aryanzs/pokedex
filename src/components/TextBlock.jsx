@@ -62,7 +62,7 @@ function TextBlock() {
                 </marquee>
   
             </div>
-            <div className='flex h-48' >
+            <div className='flex h-48 bottom-10' >
                     <img src={grass} alt="grass" />  
                     <img src={grass} alt="grass" />  
                     <img src={grass} alt="grass" />  
