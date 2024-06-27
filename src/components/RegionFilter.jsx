@@ -104,9 +104,9 @@ const RegionFilter = () => {
   return (
     <>
       <Navbar />
-      <div className="region-filter min-h-screen bg-gray-100 dark:bg-gray-900 mt-20 p-8">
+      <div className="region-filter min-h-screen bg-gray-100 dark:bg-gray-900  p-8">
         <Link to="/Pokemon"> 
-          <button className=" px-4 py-2 text-red-600 dark:text-red-400 hover:bg-rose-300 hover:text-zinc-50 dark:hover:text-zinc-50 border-2 rounded-md">Go back</button>
+          <button className=" px-4 py-2 mt-20 text-red-600 dark:text-red-400 hover:bg-rose-300 hover:text-zinc-50 dark:hover:text-zinc-50 border-2 rounded-md">Go back</button>
         </Link>
 
         <div className="region-buttons flex flex-wrap mt-10 justify-center">
@@ -133,7 +133,7 @@ const RegionFilter = () => {
                 currentPokemonList.map((pokemon, index) => (
                   <div
                     key={index}
-                    className="bg-gray-200 dark:bg-gray-800 rounded-lg p-4 shadow-xl relative transition-colors duration-300 hover:bg-gradient-to-b hover:from-red-400 hover:via-red-300 hover:to-zinc-200 dark:hover:bg-gradient-to-b dark:hover:from-red-600 dark:hover:via-red-500 dark:hover:to-gray-800"
+                    className="bg-gray-200 dark:bg-gray-800 rounded-lg p-4 shadow-xl relative transition-colors duration-300 hover:bg-gradient-to-b hover:from-red-400 hover:via-red-300 hover:to-zinc-200 dark:hover:bg-gradient-to-b dark:hover:from-red-300 dark:hover:via-red-200 dark:hover:to-gray-800"
                   >
                     <button
                       className="absolute top-2 right-2 text-red-800 dark:text-red-400 rounded-full p-1"

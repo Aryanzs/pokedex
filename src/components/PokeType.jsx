@@ -102,9 +102,9 @@ const PokeType = () => {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen bg-gray-100 dark:bg-gray-900 mt-20">
+      <div className="min-h-screen bg-gray-100 dark:bg-gray-900 ">
         <Link to="/Pokemon"> 
-          <button className="px-4 py-2 mt-4 text-red-600 dark:text-red-500 hover:bg-rose-300 hover:text-zinc-50 border-2 rounded-md">Go back</button>
+          <button className="px-4 py-2 mt-24 text-red-600 dark:text-red-500 hover:bg-rose-300 hover:text-zinc-50 border-2 rounded-md">Go back</button>
         </Link>
         <div className="p-8">
           <div className="mb-4 mx-auto w-full max-w-[1000px] px-4">
