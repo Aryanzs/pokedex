@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 import Spinner from './Spinner';  // Import the Spinner component
 import charizard from '../assets/images/charizard.gif'
 import Footer from './Footer';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import './FeaturedPokemon.css';
 
 const pokemonCategories = {
   starter: {
@@ -163,6 +165,7 @@ const FeaturedPokemon = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState('starter');
   const [isLoading, setIsLoading] = useState(true);
+  const [slideDirection, setSlideDirection] = useState('right');
 
   const fetchPokemonDetails = async (urls) => {
     setIsLoading(true);
@@ -191,11 +194,13 @@ const FeaturedPokemon = () => {
   }, [selectedCategory]);
 
   const handlePrevClick = () => {
-    setCurrentIndex((prevIndex) => (prevIndex === 0 ? featuredPokemon.length - 3 : prevIndex - 3));
+    setSlideDirection('left');
+    setCurrentIndex((prevIndex) => (prevIndex === 0 ? featuredPokemon.length - 1 : prevIndex - 1));
   };
 
   const handleNextClick = () => {
-    setCurrentIndex((prevIndex) => (prevIndex >= featuredPokemon.length - 3 ? 0 : prevIndex + 3));
+    setSlideDirection('right');
+    setCurrentIndex((prevIndex) => (prevIndex === featuredPokemon.length - 1 ? 0 : prevIndex + 1));
   };
 
   const handleCategoryChange = (event) => {
@@ -208,6 +213,8 @@ const FeaturedPokemon = () => {
   }
 
   const displayedPokemon = [
+    featuredPokemon[(currentIndex - 2 + featuredPokemon.length) % featuredPokemon.length],
+    featuredPokemon[(currentIndex - 1 + featuredPokemon.length) % featuredPokemon.length],
     featuredPokemon[currentIndex],
     featuredPokemon[(currentIndex + 1) % featuredPokemon.length],
     featuredPokemon[(currentIndex + 2) % featuredPokemon.length],
@@ -230,53 +237,60 @@ const FeaturedPokemon = () => {
             ))}
           </select>
         </div>
-        <div className="relative group">
+        <div className="pokemon-slider relative group">
           <button
             className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white text-white p-2 rounded-full shadow-lg z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
             onClick={handlePrevClick}
           >
             <img src={LarrowIcon} alt="Previous" className="w-9 h-9" />
           </button>
-          <div className="flex items-center justify-center space-x-4">
-            {displayedPokemon.map((pokemon) => (
-              <Link
-                key={pokemon.id}
-                to={`/pokemon/${pokemon.id}`}
-                className="w-full md:w-1/3 flex-shrink-0 flex items-center justify-center bg-gray-700 text-white rounded-lg p-4 shadow-xl m-2 no-underline"
+          <TransitionGroup className="pokemon-slider-inner">
+            {displayedPokemon.map((pokemon, index) => (
+              <CSSTransition
+                key={`${pokemon.id}-${index}`}
+                classNames={`slide-${slideDirection}`}
+                timeout={500}
               >
-                <div className="w-full">
-                  {pokemon.officialArtworkUrl ? (
-                    <img
-                      src={pokemon.officialArtworkUrl}
-                      alt={pokemon.name}
-                      className="w-full h-64 object-contain mb-2"
-                    />
-                  ) : (
-                    <div className="h-64 flex items-center justify-center bg-gray-600 mb-2">
-                      <p>No official artwork available</p>
+                <div className="pokemon-card">
+                  <Link
+                    to={`/pokemon/${pokemon.id}`}
+                    className="block bg-gray-700 text-white rounded-lg p-4 shadow-xl m-2 no-underline"
+                  >
+                    <div className="w-full">
+                      {pokemon.officialArtworkUrl ? (
+                        <img
+                          src={pokemon.officialArtworkUrl}
+                          alt={pokemon.name}
+                          className="w-full h-64 object-contain mb-2"
+                        />
+                      ) : (
+                        <div className="h-64 flex items-center justify-center bg-gray-600 mb-2">
+                          <p>No official artwork available</p>
+                        </div>
+                      )}
+                      <div className="text-center">
+                        <p className="text-xl font-bold capitalize">{pokemon.name}</p>
+                        <p className="text-sm">Type:</p>
+                        <div className="flex justify-center flex-wrap">
+                          {pokemon.types.map((type, i) => (
+                            <span
+                              key={i}
+                              className={`px-4 py-1 m-1 rounded ${typeColors[type.type.name]}`}
+                            >
+                              {type.type.name}
+                            </span>
+                          ))}
+                        </div>
+                        <p className="text-sm mt-2">
+                          Abilities: {pokemon.abilities.map((ability) => ability.ability.name).join(', ')}
+                        </p>
+                      </div>
                     </div>
-                  )}
-                  <div className="text-center">
-                    <p className="text-xl font-bold capitalize">{pokemon.name}</p>
-                    <p className="text-sm">Type:</p>
-                    <div className="flex justify-center flex-wrap">
-                      {pokemon.types.map((type, i) => (
-                        <span
-                          key={i}
-                          className={`px-4 py-1 m-1 rounded ${typeColors[type.type.name]}`}
-                        >
-                          {type.type.name}
-                        </span>
-                      ))}
-                    </div>
-                    <p className="text-sm mt-2">
-                      Abilities: {pokemon.abilities.map((ability) => ability.ability.name).join(', ')}
-                    </p>
-                  </div>
+                  </Link>
                 </div>
-              </Link>
+              </CSSTransition>
             ))}
-          </div>
+          </TransitionGroup>
           <button
             className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white text-white p-2 rounded-full shadow-lg z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
             onClick={handleNextClick}
