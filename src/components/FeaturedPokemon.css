@@ -21,6 +21,12 @@
       max-width: 100%;
     }
   }
+  @media (min-width: 768px) {
+    .pokemon-card {
+      flex: 0 0 33.333%;
+      max-width: 33.333%;
+    }
+  }
   
   .slide-enter {
     transform: translateX(100%);
